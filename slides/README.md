@@ -13,11 +13,18 @@ it needs; later builds are offline. The deck uses Avenir Next when the system
 has it (macOS) and falls back to Latin Modern Sans otherwise, so the PDF looks
 slightly different on other machines but builds anywhere.
 
+## Commit policy
+
+`talk.pdf` is committed with every change to the deck, so the PDF on `main`
+is always the current build. Run `./slides/build.sh` and commit `talk.tex`
+and `talk.pdf` together.
+
 ## Videos
 
 PDFs do not play video reliably, so the deck shows the snapshot grid for each
-clip and the script says when to switch to the clip. The clips live in
-`outputs/` (gitignored, ~3.5 MB each); regenerate them with:
+clip and the script says when to switch to the clip. The clips are committed
+in `videos/` (~3.5 MB each, ~10 MB total). `build.sh` refreshes them from
+`outputs/` when a fresh render exists there; regenerate with:
 
 ```sh
 uv run python scripts/wave1d_demo.py --n 100 --sharpness 150 --out outputs/wave1d_naive_vs_aware_coarse.mp4
@@ -25,7 +32,9 @@ uv run python scripts/wave2d_demo.py                    # outputs/wave2d_naive_v
 uv run python scripts/wave2d_demo.py --amplitude 0.02   # outputs/wave2d_naive_vs_aware_curved.mp4
 ```
 
-Open all three in QuickTime before the talk and use Cmd-Tab to switch.
+Re-commit a clip only when its content changed (ffmpeg output differs
+byte-for-byte between runs). Open all three in QuickTime before the talk and
+use Cmd-Tab to switch.
 
 ## Figures
 
