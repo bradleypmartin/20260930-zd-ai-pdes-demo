@@ -37,7 +37,11 @@ byte-for-byte between runs).
 
 **Playing them in the talk:** open `slides/clips.html` in Chrome (a
 `file://` URL is fine; it has no external resources), press `F` for full
-screen, and use `1`, `2`, `3` to play each clip from the start. `space`
+screen, and use `1`, `2`, `3` to play each clip from the start. The same
+page is hosted by GitHub Pages from `main` at
+<https://bradleypmartin.github.io/20260930-zd-ai-pdes-demo/slides/clips.html>
+(the deck: `.../slides/talk.pdf`; landing page at the root). Use the local
+copy on the day; the hosted one is for sharing. `space`
 pauses, `R` restarts, arrows cycle, `L` toggles looping. Keep it in a window
 next to the PDF and Cmd-Tab between them. QuickTime works as a fallback.
 
