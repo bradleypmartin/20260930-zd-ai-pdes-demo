@@ -195,8 +195,10 @@ are attributed, never asserted.
   unforced problem, a prompt itself written with Codex, "an insane amount of
   compute". The first prompt was eventually agreed to have been sent "in the
   past few days, after information about our work had reached OpenAI". On
-  data: "I was told the model did not look up user data. I asked again,
-  about training, and I did not get an answer." Two proposals: post Euler,
+  data: "I asked whether the model had been trained on, or had access to,
+  our sessions in Codex, into which we had been putting all our drafts for
+  the whole of this project. I was told the model did not look up user data.
+  I asked again, about training, and I did not get an answer." Two proposals: post Euler,
   OpenAI posts Navier–Stokes the next day; or Buckmaster alone writes the
   Navier–Stokes paper crediting an OpenAI model, with Alpöge removed from
   authorship ("Sebastien twice asserted that he wanted Levent removed").
