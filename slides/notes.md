@@ -2,7 +2,8 @@
 
 Timings assume ~1 minute per slide with the clips inside Part 2. Rehearse on
 Sep 29 and trim from the Reactions and Questions slides first if long.
-Clip files are in `slides/videos/`; open all three in QuickTime beforehand.
+Clips play from `slides/clips.html` (open in Chrome, `F` for full screen,
+`1`/`2`/`3` to play each from the start); the files are in `slides/videos/`.
 
 | Slide | Time | Cue |
 | --- | --- | --- |
@@ -114,8 +115,7 @@ boundary. Everything else is the same code.
 
 ## 17. 1-D ringing (17:30)
 
-Explain the figure, then **play clip 1**
-(`slides/videos/wave1d_naive_vs_aware_coarse.mp4`, 10 s). Left panel rings, right
+Explain the figure, then **play clip 1** (key `1` in clips.html, 10 s). Left panel rings, right
 panel sits on the dashed exact curve. Both panels are the same grid and
 time step.
 
@@ -130,9 +130,8 @@ years and is still not proven. 30 nearest neighbours per stencil.
 
 ## 20. 2-D naive vs aware (21:00)
 
-Explain the four columns, then **play clip 2**
-(`slides/videos/wave2d_naive_vs_aware.mp4`, 8 s) and **clip 3**
-(`slides/videos/wave2d_naive_vs_aware_curved.mp4`, 8 s). Watch the error maps: the
+Explain the four columns, then **play clip 2** (key `2`, 8 s) and
+**clip 3** (key `3`, 8 s). Watch the error maps: the
 standard error is born at the boundary and travels with the wave.
 
 ## 21. 2-D convergence (23:00)

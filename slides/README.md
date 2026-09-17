@@ -33,8 +33,13 @@ uv run python scripts/wave2d_demo.py --amplitude 0.02   # outputs/wave2d_naive_v
 ```
 
 Re-commit a clip only when its content changed (ffmpeg output differs
-byte-for-byte between runs). Open all three in QuickTime before the talk and
-use Cmd-Tab to switch.
+byte-for-byte between runs).
+
+**Playing them in the talk:** open `slides/clips.html` in Chrome (a
+`file://` URL is fine; it has no external resources), press `F` for full
+screen, and use `1`, `2`, `3` to play each clip from the start. `space`
+pauses, `R` restarts, arrows cycle, `L` toggles looping. Keep it in a window
+next to the PDF and Cmd-Tab between them. QuickTime works as a fallback.
 
 ## Figures
 

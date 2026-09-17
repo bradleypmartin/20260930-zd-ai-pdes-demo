@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Clips: two kinds of AI in research math</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /* Palette shared with src/pdes_demo/plotting.py and talk.tex. */
+  :root {
+    --surface: #fcfcfb; --ink: #0b0b0b; --ink-secondary: #52514e;
+    --ink-muted: #8a8985; --layer: #f0efec; --aware: #2a78d6; --naive: #eb6834;
+    --navy: #0d366b;
+  }
+  html, body { height: 100%; margin: 0; background: var(--surface); color: var(--ink);
+    font: 16px/1.4 "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  body { display: flex; flex-direction: column; }
+  header { display: flex; align-items: baseline; gap: 1.5rem; padding: 0.6rem 1.2rem;
+    background: var(--navy); color: var(--surface); }
+  header h1 { font-size: 1.05rem; font-weight: 600; margin: 0; }
+  nav { display: flex; gap: 0.5rem; margin-left: auto; }
+  nav button { font: inherit; font-size: 0.95rem; padding: 0.3rem 0.8rem; border-radius: 4px;
+    border: 1px solid rgba(252,252,251,0.35); background: transparent; color: var(--surface);
+    cursor: pointer; }
+  nav button[aria-current="true"] { background: var(--aware); border-color: var(--aware); }
+  main { flex: 1; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 0.6rem 1.2rem 0.4rem; min-height: 0; }
+  video { max-width: 96vw; max-height: 84vh; width: auto; height: auto; display: block;
+    background: var(--surface); border: 1px solid var(--layer); }
+  video[hidden] { display: none; }
+  #caption { margin: 0.5rem 0 0; color: var(--ink-secondary); text-align: center; }
+  footer { padding: 0.35rem 1.2rem 0.6rem; color: var(--ink-muted); font-size: 0.85rem;
+    text-align: center; }
+  kbd { font: inherit; font-size: 0.8rem; padding: 0 0.35rem; border: 1px solid var(--ink-muted);
+    border-radius: 3px; background: var(--layer); color: var(--ink); }
+  body:fullscreen header, body:fullscreen footer { display: none; }
+  body:fullscreen main { padding: 0; }
+  body:fullscreen video { max-height: 100vh; max-width: 100vw; border: none; }
+  body:fullscreen #caption { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Clips</h1>
+  <nav aria-label="Clips">
+    <button type="button" data-clip="0">1: 1-D ringing</button>
+    <button type="button" data-clip="1">2: 2-D flat</button>
+    <button type="button" data-clip="2">3: 2-D curved</button>
+  </nav>
+</header>
+<main>
+  <!-- One element per clip, all preloaded, so switching is instant. The
+       width/height attributes give each its aspect ratio before metadata loads. -->
+  <video class="clip" src="videos/wave1d_naive_vs_aware_coarse.mp4" width="1760" height="1632"
+    muted playsinline preload="auto" controls hidden
+    data-caption="1-D: standard vs interface-aware finite differences, 100 grid points, same time step (10 s)"></video>
+  <video class="clip" src="videos/wave2d_naive_vs_aware.mp4" width="2080" height="1728"
+    muted playsinline preload="auto" controls hidden
+    data-caption="2-D: standard vs interface-aware RBF-FD, flat boundaries, error against the exact solution (8 s)"></video>
+  <video class="clip" src="videos/wave2d_naive_vs_aware_curved.mp4" width="2080" height="1728"
+    muted playsinline preload="auto" controls hidden
+    data-caption="2-D: same, curved boundaries, error against a 40,000-point reference run (8 s)"></video>
+  <p id="caption"></p>
+</main>
+<footer>
+  <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> pick a clip and play it from the start &middot;
+  <kbd>space</kbd> pause / resume &middot; <kbd>R</kbd> restart &middot;
+  <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next &middot; <kbd>F</kbd> full screen &middot;
+  <kbd>L</kbd> loop
+</footer>
+<script>
+  const clips = [...document.querySelectorAll("video.clip")];
+  const caption = document.getElementById("caption");
+  const buttons = [...document.querySelectorAll("nav button")];
+  let current = -1;
+  let loop = false;
+  const player = () => clips[current];
+
+  function show(i, play = true) {
+    if (current >= 0) { player().pause(); player().hidden = true; }
+    current = (i + clips.length) % clips.length;
+    const v = player();
+    v.hidden = false;
+    v.loop = loop;
+    v.currentTime = 0;
+    caption.textContent = v.dataset.caption;
+    buttons.forEach((b, j) => b.setAttribute("aria-current", j === current ? "true" : "false"));
+    if (play) v.play().catch(() => {});
+  }
+
+  buttons.forEach((b) => b.addEventListener("click", () => show(Number(b.dataset.clip))));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const v = player();
+    switch (e.key) {
+      case "1": case "2": case "3": show(Number(e.key) - 1); break;
+      case " ": e.preventDefault(); v.paused ? v.play() : v.pause(); break;
+      case "r": case "R": v.currentTime = 0; v.play(); break;
+      case "ArrowRight": show(current + 1); break;
+      case "ArrowLeft": show(current - 1); break;
+      case "f": case "F":
+        document.fullscreenElement ? document.exitFullscreen() : document.body.requestFullscreen();
+        break;
+      case "l": case "L": loop = !loop; v.loop = loop; break;
+      default: return;
+    }
+  });
+
+  show(0, false);
+</script>
+</body>
+</html>
