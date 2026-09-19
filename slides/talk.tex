@@ -47,11 +47,14 @@
 % (scripts/check_slide_quotes.py enforces that); \sq is for scare quotes.
 \newcommand{\q}[1]{``#1''}
 \newcommand{\sq}[1]{``#1''}
-% A big number over a short caption; five of these fit across the text width.
+% A big number over a short caption; five of these fit across the text width
+% with no horizontal slack (fboxsep and width are at their limit). The box is
+% taller than the two-line content so the text sits clear of its edges.
 \newcommand{\tile}[2]{%
   {\setlength{\fboxsep}{5pt}\colorbox{layer}{%
-    \begin{minipage}[c][1.25cm][c]{2.4cm}\centering
-      {\LARGE\bfseries\color{navy}#1}\\[3pt]{\scriptsize\color{inksec}#2}
+    \begin{minipage}[c][1.35cm][c]{2.4cm}\centering
+      {\LARGE\bfseries\color{navy}#1}\\[3pt]
+      {\fontsize{7}{7.5}\selectfont\color{inksec}#2\par}% \par inside the group
     \end{minipage}}}}
 
 \title{AI and Applied Math circa September 2026}
