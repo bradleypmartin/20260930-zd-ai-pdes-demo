@@ -112,8 +112,8 @@ nine years old, no licence; re-derive from the papers, port, verify, one day.
 ## 13. 1-D ringing (10/16, 16:30)
 
 Explain the figure, then **play clip 1** (key `1` in clips.html, 10 s). Left
-panel rings, right panel sits on the dashed exact curve. Both panels are the
-same grid and time step.
+panel rings, right panel stays clean; the error strips underneath make the
+comparison. Both panels are the same grid and time step.
 
 ## 14. 2-D scattered points (11/16, 18:30)
 
