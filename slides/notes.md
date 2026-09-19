@@ -49,7 +49,7 @@ nobody has answered that.
 ## 5. What happened, in two weeks (3/16, 3:30)
 
 Walk the timeline left to right, two colours. Blue: Alpöge and Buckmaster had
-results in mid-August and went public the night of Sep 7. Navy: OpenAI's
+results in mid-August and went public the night of Sep 7. Orange: OpenAI's
 sprint started Sep 1 after a rumour, reached the result Sep 5, announced
 Sep 8. Grey: Clay on Sep 11 said "apparently settled" and "unhurried"; the
 Fields Medalists published the same day; a week later Clay still lists the
