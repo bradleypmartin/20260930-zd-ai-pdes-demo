@@ -146,7 +146,7 @@ Tiles first: one day, nine PRs, 106 tests, four real bugs caught before the
 demo. Then the two columns. The human list is the same list as Part 1's
 questions: steering, judging what matters, designing the verification.
 
-## 18. Two kinds (15/16, 26:00)
+## 18. Two scales (15/16, 26:00)
 
 The table. Capability is real at both ends. The difference is steering,
 checking, and understanding.
