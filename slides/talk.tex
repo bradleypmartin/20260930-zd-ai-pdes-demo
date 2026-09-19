@@ -414,12 +414,11 @@
     \includegraphics[width=0.72\textwidth]{figures/wave2d_convergence_flat.png}
   \end{columns}
   \begin{itemize}
-    \item \textcolor{naive}{Standard}: double the points, halve the error
-      (1-D) or quarter it (2-D). The corner caps the accuracy.
+    \item \textcolor{naive}{Standard}: double the points, halve the error, in
+      1-D and 2-D alike. The corner caps the accuracy.
     \item \textcolor{aware}{Interface-aware}: double the points, divide the
-      error by 16. In 2-D it sits on the dashed no-boundary line: nothing left
-      to fix.
-    \item Same story for a thinner layer and for curved boundaries.
+      error by 16 (1-D) or by 4 (2-D).
+    \item Same story for a thinner layer.
   \end{itemize}
   \src{Python port of dissertation Figs.\,2-8 and 3-5, error against exact solutions; thin-layer and curved cases in the repository.}
 \end{frame}

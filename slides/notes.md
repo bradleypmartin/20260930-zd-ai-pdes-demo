@@ -133,10 +133,12 @@ travels with the wave.
 
 ## 16. How fast the error shrinks (13/16, 22:00)
 
-Left, 1-D: halve vs divide by 16. Right, 2-D: the dashed line is what you
-would get with no boundary at all, and the interface-aware error sits on it.
-Nothing left to fix. The thin-layer and curved-boundary panels are in the
-repo for anyone who asks.
+Left, 1-D: halve vs divide by 16. Right, 2-D: halve vs divide by 4. Same
+orders (first or second vs fourth); in 2-D doubling the points only shrinks
+the spacing by root two, which is why the 2-D factors are smaller. The dashed
+line is what you would get with no boundary at all, and the interface-aware
+error sits on it: nothing left to fix. The thin-layer and curved-boundary
+panels are in the repo for anyone who asks.
 
 ## 17. What the collaboration looked like (14/16, 24:00)
 
