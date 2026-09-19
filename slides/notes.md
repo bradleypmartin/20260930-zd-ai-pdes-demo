@@ -29,8 +29,7 @@ Anthropic researcher published a year of closely related work, done with
 Claude and Codex. And I rebuilt my dissertation's simulation methods with
 Claude Code in a day. The thesis: agents bring staggering programming and
 logical power; paired with a human's intuition in a field they make progress
-fast at every scale, from 10,000 agents to one assistant. What changes with
-scale is who can check the result and who ends up understanding it.
+fast at every scale, from 10,000 agents to one assistant.
 
 ## 3. Part 1 section (1:30)
 
