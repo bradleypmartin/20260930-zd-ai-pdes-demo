@@ -340,7 +340,7 @@
       \item 2016 PhD, applied mathematics, CU Boulder: seismic imaging (sound
         through rock), ultrasound (sound through tissue).
       \item A simulation stores the wave at grid points and estimates slopes
-        from a few neighbours: a \textbf{stencil}. One that straddles the
+        from a few neighbours: a \textcolor{naive}{\textbf{stencil}}. One that straddles the
         corner assumes a smooth curve and gets the slope wrong.
       \item The fix: rebuild the few stencils near the boundary from pieces
         that are allowed a corner there. Nothing else changes.
