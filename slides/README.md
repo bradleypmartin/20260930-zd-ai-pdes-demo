@@ -8,10 +8,22 @@ with timings and the cue points for the three video clips.
 ./slides/build.sh          # copies figures from outputs/ if present, runs tectonic
 ```
 
-Requires `tectonic` (Homebrew). The first build downloads the LaTeX packages
-it needs; later builds are offline. The deck uses Avenir Next when the system
+Requires `tectonic` (Homebrew) and the project venv (`uv sync`): `build.sh`
+crops the left panel of each convergence figure with Pillow before running
+tectonic. The first build downloads the LaTeX packages it needs; later builds
+are offline. The deck uses Avenir Next when the system
 has it (macOS) and falls back to Latin Modern Sans otherwise, so the PDF looks
 slightly different on other machines but builds anywhere.
+
+## Quotations
+
+Every `\q{...}` in `talk.tex` must appear in `docs/navier-stokes-notes.md`,
+which is where each quotation's source is recorded; scare quotes use
+`\sq{...}`. After editing the deck:
+
+```sh
+uv run python scripts/check_slide_quotes.py
+```
 
 ## Commit policy
 

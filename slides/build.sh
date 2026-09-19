@@ -15,7 +15,6 @@ figures=(
   wave2d_naive_vs_aware.png
   wave2d_naive_vs_aware_curved.png
   wave2d_convergence.png
-  wave2d_eigenvalues.png
 )
 
 videos=(
@@ -42,5 +41,18 @@ for f in "${videos[@]}"; do
 done
 
 cd "$here"
+# The "How fast the error shrinks" frame shows the left panel of each
+# convergence figure; crop them here so the drivers stay unchanged.
+uv run --project "$root" --quiet python - <<'PY'
+from PIL import Image  # bundled with matplotlib
+
+for src, dst in [
+    ("wave1d_convergence", "wave1d_convergence_wide"),
+    ("wave2d_convergence", "wave2d_convergence_flat"),
+]:
+    im = Image.open(f"figures/{src}.png")
+    w, h = im.size
+    im.crop((0, int(0.105 * h), int(0.53 * w), h)).save(f"figures/{dst}.png")
+PY
 tectonic talk.tex
 echo "wrote $here/talk.pdf ($(pdfinfo talk.pdf 2>/dev/null | awk '/^Pages/ {print $2}') pages)"
