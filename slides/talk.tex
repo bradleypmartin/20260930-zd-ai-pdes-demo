@@ -321,14 +321,14 @@
   \begin{columns}[c]
     \column{0.47\textwidth}
     \centering
-    \begin{tikzpicture}[x=0.82cm, y=0.82cm]
+    % Tall y scale so the kink at the interface is unmistakable.
+    \begin{tikzpicture}[x=0.82cm, y=1.5cm]
       \fill[layer] (0, -0.25) rectangle (3.3, 2.3);
       \node[font=\scriptsize, inksec] at (1.65, 2.1) {different material};
       \draw[->, inkmuted] (-3.3, 0) -- (3.5, 0) node[right, font=\scriptsize] {$x$};
       \draw[thick, ink] plot[smooth] coordinates {(-3, 0.08) (-2.4, 0.14) (-1.8, 0.38) (-1.2, 0.85) (-0.6, 1.35) (0, 1.6)};
-      \draw[thick, ink] plot[smooth] coordinates {(0, 1.6) (0.6, 1.32) (1.2, 1.18) (1.8, 1.1) (2.4, 1.06) (3, 1.03)};
+      \draw[thick, ink] plot[smooth] coordinates {(0, 1.6) (0.6, 1.2) (1.2, 1.0) (1.8, 0.9) (2.4, 0.85) (3, 0.82)};
       \foreach \x in {-3, -2.4, ..., 3.01} {\fill[inkmuted] (\x, 0) circle (1.2pt);}
-      \draw[naive, dashed, thick] plot[smooth] coordinates {(-1.2, 0.85) (-0.6, 1.35) (-0.25, 1.68) (0.25, 1.62) (0.6, 1.32) (1.2, 1.18)};
       \foreach \x in {-1.2, -0.6, 0, 0.6, 1.2} {\fill[naive] (\x, 0) circle (2.2pt);}
       \draw[naive, very thick] (-1.35, -0.5) -- (1.35, -0.5);
       \node[naive, font=\scriptsize, below] at (0, -0.55) {a stencil that straddles the corner};
@@ -341,7 +341,7 @@
         through rock), ultrasound (sound through tissue).
       \item A simulation stores the wave at grid points and estimates slopes
         from a few neighbours: a \textbf{stencil}. One that straddles the
-        corner assumes a smooth curve (dashed) and gets the slope wrong.
+        corner assumes a smooth curve and gets the slope wrong.
       \item The fix: rebuild the few stencils near the boundary from pieces
         that are allowed a corner there. Nothing else changes.
       \item The experiment: nine-year-old MATLAB, no licence. With Claude
