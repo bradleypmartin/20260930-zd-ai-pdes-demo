@@ -27,8 +27,9 @@ Three things happened in two weeks. OpenAI said its AI settled a famous $1M
 question about fluids. The night before, an NYU mathematician and an
 Anthropic researcher published a year of closely related work, done with
 Claude and Codex. And I rebuilt my dissertation's simulation methods with
-Claude Code in a day. The thesis: "AI in research math" is two very different
-activities, and the difference is who steers and who can check the result.
+Claude Fable 5.1 in a day. The thesis: agents bring staggering programming and
+logical power; paired with a human's intuition in a field they make progress
+fast at every scale, from 10,000 agents to one assistant.
 
 ## 3. Part 1 section (1:30)
 
@@ -48,7 +49,7 @@ nobody has answered that.
 ## 5. What happened, in two weeks (3/16, 3:30)
 
 Walk the timeline left to right, two colours. Blue: Alpöge and Buckmaster had
-results in mid-August and went public the night of Sep 7. Navy: OpenAI's
+results in mid-August and went public the night of Sep 7. Orange: OpenAI's
 sprint started Sep 1 after a rumour, reached the result Sep 5, announced
 Sep 8. Grey: Clay on Sep 11 said "apparently settled" and "unhurried"; the
 Fields Medalists published the same day; a week later Clay still lists the
@@ -95,7 +96,7 @@ statement a mathematical community has made about AI; Tao's "non-renewable
 resource" line is the one to remember; Buckmaster's "Deep Blue–Kasparov";
 Bubeck's line shows the other frame, a capabilities demonstration. Right
 column: pick two and ask the room. Trust and compute get the most reaction
-with a tech audience. Then: "Part 2 is the other kind."
+with a tech audience. Then: "Part 2 is my end of the scale."
 
 ## 11. Part 2 section (14:30)
 
@@ -132,10 +133,12 @@ travels with the wave.
 
 ## 16. How fast the error shrinks (13/16, 22:00)
 
-Left, 1-D: halve vs divide by 16. Right, 2-D: the dashed line is what you
-would get with no boundary at all, and the interface-aware error sits on it.
-Nothing left to fix. The thin-layer and curved-boundary panels are in the
-repo for anyone who asks.
+Left, 1-D: halve vs divide by 16. Right, 2-D: halve vs divide by 4. Same
+orders (first or second vs fourth); in 2-D doubling the points only shrinks
+the spacing by root two, which is why the 2-D factors are smaller. The dashed
+line is what you would get with no boundary at all, and the interface-aware
+error sits on it: nothing left to fix. The thin-layer and curved-boundary
+panels are in the repo for anyone who asks.
 
 ## 17. What the collaboration looked like (14/16, 24:00)
 
@@ -143,7 +146,7 @@ Tiles first: one day, nine PRs, 106 tests, four real bugs caught before the
 demo. Then the two columns. The human list is the same list as Part 1's
 questions: steering, judging what matters, designing the verification.
 
-## 18. Two kinds (15/16, 26:00)
+## 18. Two scales (15/16, 26:00)
 
 The table. Capability is real at both ends. The difference is steering,
 checking, and understanding.

@@ -1,4 +1,4 @@
-% Two kinds of AI in research math. Ziff Davis, 2026-09-30.
+% AI and Applied Math circa September 2026. Ziff Davis, 2026-09-30.
 % Build: ./slides/build.sh (tectonic). Sources for every Part 1 claim are in
 % docs/navier-stokes-notes.md; Part 2 numbers are in docs/demo-outline.md.
 % Budget: title, two section frames, seven frames per part, plus a short
@@ -22,6 +22,9 @@
 \definecolor{aware}{HTML}{2A78D6}
 \definecolor{naive}{HTML}{EB6834}
 \definecolor{navy}{HTML}{0D366B}
+% The 2-D colour maps (plotting.py): aqua = field magnitude, violet = error.
+\definecolor{fieldaqua}{HTML}{078F62}
+\definecolor{errviolet}{HTML}{6F67D4}
 
 \setbeamercolor{normal text}{fg=ink, bg=surface}
 \setbeamercolor{frametitle}{fg=surface, bg=navy}
@@ -47,16 +50,20 @@
 % (scripts/check_slide_quotes.py enforces that); \sq is for scare quotes.
 \newcommand{\q}[1]{``#1''}
 \newcommand{\sq}[1]{``#1''}
-% A big number over a short caption; five of these fit across the text width.
+% A big number over a short caption; five of these fit across the text width
+% with no horizontal slack (fboxsep and width are at their limit). The box is
+% taller than the two-line content so the text sits clear of its edges.
 \newcommand{\tile}[2]{%
   {\setlength{\fboxsep}{5pt}\colorbox{layer}{%
-    \begin{minipage}[c][1.25cm][c]{2.4cm}\centering
-      {\LARGE\bfseries\color{navy}#1}\\[3pt]{\scriptsize\color{inksec}#2}
+    \begin{minipage}[c][1.35cm][c]{2.4cm}\centering
+      {\LARGE\bfseries\color{navy}#1}\\[3pt]
+      {\fontsize{7}{7.5}\selectfont\color{inksec}#2\par}% \par inside the group
     \end{minipage}}}}
 
-\title{Two kinds of AI in research math}
-\subtitle{A Millennium Prize claim, and an afternoon with a coding assistant}
-\author{Brad Martin}
+\title{AI and Applied Math circa September 2026}
+\subtitle{Excitement, ethics, and individual exploration}
+% Two-line author: metropolis would put \institute below the date.
+\author{Brad Martin\\{\small Principal Algorithm Engineer -- FullContact}}
 \date{30 September 2026}
 
 \begin{document}
@@ -66,15 +73,17 @@
 \begin{frame}{Why this talk}
   \begin{itemize}
     \item 8 September: OpenAI says its AI settled a 90-year-old, \$1M question
-      about how fluids move.
+      about fluids.
     \item The night before: two mathematicians, working with Claude and
       Codex, go public with a year of closely related work.
     \item Two weeks ago: I rebuilt the simulation methods from my 2016
-      dissertation with Claude Code, in a day.
+      dissertation with Claude Fable 5.1, in a day.
   \end{itemize}
   \begin{block}{Thesis}
-    \sq{AI in research math} currently means two very different things.
-    Both are worth seeing up close.
+    AI agents now bring a staggering amount of programming and logical power.
+    Paired with a human's experience and intuition in a field, they make
+    progress fast, at every scale: 10,000 agents on a Millennium problem, or
+    one assistant in my corner of PDEs.
   \end{block}
   \begin{columns}[t]
     \column{0.48\textwidth}
@@ -97,10 +106,7 @@
       always predict smooth motion, or can they predict \alert{infinite speed
       in finite time} (\q{blowup})? Real fluids cannot; blowup would mean the
       model leaves its own range of validity.
-    \item Clay Mathematics Institute, 2000: \$1M for an answer either way. The
-      fine print: a counterexample may use a smooth, well-behaved stirring
-      force. The picture most people carry, \sq{can turbulence by itself blow
-      up?}, is the \emph{unforced} question.
+    \item Clay Mathematics Institute, 2000: \$1M for an answer either way.
   \end{itemize}
   \vspace{2pt}
   \centering
@@ -128,8 +134,8 @@
     % Above the line.
     \foreach \x/\col/\date/\text in {
       1.75/aware/Aug 15--22/{Alpöge and Buckmaster get blowup with smooth forcing for two model equations, including 3-D Euler. Lean-verified a week later.},
-      5.25/navy/Sep 5/{OpenAI's agents reach the Navier--Stokes result, 88 hours after launch.},
-      8.75/navy/Sep 8/{OpenAI announces: blog post, 166-page manuscript, Lean repository.},
+      5.25/naive/Sep 5/{OpenAI's agents reach the Navier--Stokes result, 88 hours after launch.},
+      8.75/naive/Sep 8/{OpenAI announces: blog post, 166-page manuscript, Lean repository.},
       12.25/inksec/Sep 16--17/{Nature editorial on attribution. Clay's site lists the problem as \q{Active}, not \q{Solved}.}} {
       \fill[\col] (\x, 0) circle (3pt);
       \draw[\col, thick] (\x, 0) -- (\x, 0.35);
@@ -137,7 +143,7 @@
     }
     % Below the line.
     \foreach \x/\col/\date/\text in {
-      3.5/navy/Sep 1/{A rumour that \q{two Millennium Prize problems had been resolved}. OpenAI points agent groups at all six open problems.},
+      3.5/naive/Sep 1/{A rumour that \q{two Millennium Prize problems had been resolved}. OpenAI points agent groups at all six open problems.},
       7/aware/{Sep 7, night}/{Buckmaster and Alpöge post three papers, Lean code, and a statement. A Caltech group posts a third, numerical route.},
       10.5/inksec/Sep 11/{Clay: the problem \q{has apparently been settled}; review \q{deliberately unhurried}. Twenty-five Fields Medalists publish a declaration.}} {
       \fill[\col] (\x, 0) circle (3pt);
@@ -146,9 +152,9 @@
     }
   \end{tikzpicture}
   \\[6pt]
-  {\scriptsize\color{inksec}
+  {\small\color{inksec}
     \textcolor{aware}{$\bullet$} Alpöge and Buckmaster \quad
-    \textcolor{navy}{$\bullet$} OpenAI \quad
+    \textcolor{naive}{$\bullet$} OpenAI \quad
     \textcolor{inksec}{$\bullet$} Clay and the community}
   \src{Sources: OpenAI's post; Buckmaster's statement; claymath.org; mathandai.org; nature.com. Every date is traced in docs/navier-stokes-notes.md.}
 \end{frame}
@@ -215,15 +221,15 @@
   \src{Source: OpenAI's post (8 Sep, updated 10 Sep); Science, 8 Sep. Nature and Science put the warm-up at 1,000 agents; the post says \q{nearly 100}. Check press numbers against the primary source.}
 \end{frame}
 
-\begin{frame}{The parallel story, and the dispute}
+\begin{frame}{The parallel story, and the dispute: who gets credit?}
   \footnotesize
   \begin{itemize}
     \item Tristan Buckmaster (NYU) and Levent Alpöge (Anthropic), with Claude
       and Codex, for most of a year, on Buckmaster's own research funds. Both
       they and OpenAI build on Córdoba and Martínez-Zoroa.
     \item Results 15 August, Lean-verified 22 August, released 7 September,
-      earlier than planned: \q{The Euler writeup, in particular, can only be
-      described as AI slop.}
+      earlier than planned. Buckmaster, on their own papers: \q{The Euler
+      writeup, in particular, can only be described as AI slop.}
   \end{itemize}
   \begin{columns}[t]
     \column{0.49\textwidth}
@@ -256,6 +262,8 @@
     \column{0.49\textwidth}
     \textbf{Lean checks}
     \begin{itemize}
+      \item Lean itself: a programming language for mathematics. A proof is a
+        program; the compiler accepts it or rejects it.
       \item That every step follows from three standard axioms. No gaps, no
         \q{clearly}.
       \item Reproducibly: clone the repository, run the independent checker.
@@ -299,7 +307,7 @@
     \column{0.46\textwidth}
     \textbf{Questions}
     \begin{enumerate}
-      \item \textbf{Letter vs.\ spirit.} The statement allows a smooth force,
+      \item \textbf{Definition of done.} The statement allows a smooth force,
         and this result uses one. Is the Millennium problem solved?
       \item \textbf{Trust.} Would you put unpublished work into a frontier
         lab's tools? What would you need to see first?
@@ -310,20 +318,20 @@
   \end{columns}
 \end{frame}
 
-\section{Part 2: the other kind}
+\section{Part 2: my end of the scale}
 
 \begin{frame}{My corner of this world: waves through layered materials}
   \begin{columns}[c]
     \column{0.47\textwidth}
     \centering
-    \begin{tikzpicture}[x=0.82cm, y=0.82cm]
+    % Tall y scale so the kink at the interface is unmistakable.
+    \begin{tikzpicture}[x=0.82cm, y=1.5cm]
       \fill[layer] (0, -0.25) rectangle (3.3, 2.3);
       \node[font=\scriptsize, inksec] at (1.65, 2.1) {different material};
       \draw[->, inkmuted] (-3.3, 0) -- (3.5, 0) node[right, font=\scriptsize] {$x$};
       \draw[thick, ink] plot[smooth] coordinates {(-3, 0.08) (-2.4, 0.14) (-1.8, 0.38) (-1.2, 0.85) (-0.6, 1.35) (0, 1.6)};
-      \draw[thick, ink] plot[smooth] coordinates {(0, 1.6) (0.6, 1.32) (1.2, 1.18) (1.8, 1.1) (2.4, 1.06) (3, 1.03)};
+      \draw[thick, ink] plot[smooth] coordinates {(0, 1.6) (0.6, 1.2) (1.2, 1.0) (1.8, 0.9) (2.4, 0.85) (3, 0.82)};
       \foreach \x in {-3, -2.4, ..., 3.01} {\fill[inkmuted] (\x, 0) circle (1.2pt);}
-      \draw[naive, dashed, thick] plot[smooth] coordinates {(-1.2, 0.85) (-0.6, 1.35) (-0.25, 1.68) (0.25, 1.62) (0.6, 1.32) (1.2, 1.18)};
       \foreach \x in {-1.2, -0.6, 0, 0.6, 1.2} {\fill[naive] (\x, 0) circle (2.2pt);}
       \draw[naive, very thick] (-1.35, -0.5) -- (1.35, -0.5);
       \node[naive, font=\scriptsize, below] at (0, -0.55) {a stencil that straddles the corner};
@@ -335,13 +343,13 @@
       \item 2016 PhD, applied mathematics, CU Boulder: seismic imaging (sound
         through rock), ultrasound (sound through tissue).
       \item A simulation stores the wave at grid points and estimates slopes
-        from a few neighbours: a \textbf{stencil}. One that straddles the
-        corner assumes a smooth curve (dashed) and gets the slope wrong.
+        from a few neighbours: a \textcolor{naive}{\textbf{stencil}}. One that straddles the
+        corner assumes a smooth curve and gets the slope wrong.
       \item The fix: rebuild the few stencils near the boundary from pieces
         that are allowed a corner there. Nothing else changes.
       \item The experiment: nine-year-old MATLAB, no licence. With Claude
-        Code: re-derive from the papers, port to Python, verify against exact
-        solutions. One day.
+        Fable 5.1: re-derive from the papers, port to Python, verify against
+        exact solutions. One day.
     \end{itemize}
   \end{columns}
 \end{frame}
@@ -358,8 +366,8 @@
       \item Same 100 grid points, same time step, same code. Only the stencils
         touching the layer edges differ.
       \item \textcolor{naive}{Standard}: wiggles behind every reflection; 10\%
-        error by $t = 1$. \textcolor{aware}{Interface-aware}: on the exact
-        solution; 3\%, all of it from the coarse grid.
+        error by $t = 1$. \textcolor{aware}{Interface-aware}: 3\% error at
+        $t = 1$, all of it from the coarse grid.
     \end{itemize}
     \clipnote{1}{wave1d\_naive\_vs\_aware\_coarse.mp4}{10 s}
   \end{columns}
@@ -367,7 +375,7 @@
 
 \begin{frame}{2-D: scattered points and curved boundaries}
   \centering
-  \includegraphics[width=0.66\textwidth]{figures/wave2d_nodes.png}
+  \includegraphics[width=0.70\textwidth]{figures/wave2d_nodes.png}
   \begin{itemize}
     \item No grid. Points are spread by a repulsion process, with fixed rows
       straddling each boundary (blue). That layout was the key to stability:
@@ -387,8 +395,9 @@
     \begin{itemize}
       \item A pressure pulse travels down through a curved band of stiffer,
         denser material. 10,000 points.
-      \item Left pair: the wave. Right pair: error against a 40,000-point
-        reference run, one colour scale.
+      \item Left pair: \textcolor{fieldaqua}{the wave}. Right pair:
+        \textcolor{errviolet}{error} against a 40,000-point reference run, one
+        colour scale.
       \item At $t = 0.3$: \textcolor{naive}{standard} 3.0\% error,
         \textcolor{aware}{interface-aware} 0.9\%. The standard error is born at
         the boundary and travels with the wave.
@@ -409,12 +418,11 @@
     \includegraphics[width=0.72\textwidth]{figures/wave2d_convergence_flat.png}
   \end{columns}
   \begin{itemize}
-    \item \textcolor{naive}{Standard}: double the points, halve the error
-      (1-D) or quarter it (2-D). The corner caps the accuracy.
+    \item \textcolor{naive}{Standard}: double the points, halve the error, in
+      1-D and 2-D alike. The corner caps the accuracy.
     \item \textcolor{aware}{Interface-aware}: double the points, divide the
-      error by 16. In 2-D it sits on the dashed no-boundary line: nothing left
-      to fix.
-    \item Same story for a thinner layer and for curved boundaries.
+      error by 16 (1-D) or by 4 (2-D).
+    \item Same story for a thinner layer.
   \end{itemize}
   \src{Python port of dissertation Figs.\,2-8 and 3-5, error against exact solutions; thin-layer and curved cases in the repository.}
 \end{frame}
@@ -429,7 +437,7 @@
   \vspace{8pt}
   \begin{columns}[t]
     \column{0.49\textwidth}
-    \textbf{The assistant}
+    \textbf{Fable 5.1 assistant}
     \begin{itemize}
       \item Every routine tested against an exact solution or a convergence
         rate, not \q{it runs}.
@@ -450,24 +458,24 @@
   \end{columns}
 \end{frame}
 
-\begin{frame}{Two kinds of AI in research math}
+\begin{frame}{Two scales of AI collaboration in research math}
   \footnotesize
   \renewcommand{\arraystretch}{1.25}
   \begin{tabular}{@{}l*{3}{>{\raggedright\arraybackslash}p{3.4cm}}@{}}
     \toprule
-     & OpenAI, Navier--Stokes & Alpöge and Buckmaster & Me, with Claude Code \\
+     & OpenAI, Navier--Stokes & Alpöge and Buckmaster & Me, with Claude Fable 5.1 \\
     \midrule
     Who steered & a lab team, via prompts & two mathematicians & one engineer \\
-    Scale & $\sim$10,000 agents, 88 h & about a year, several models & one assistant, one day \\
+    Scale & $\sim$10,000 agents, 88 h & about a year, several models & one agent, one day \\
     Verification & Lean; Clay review pending & Lean; papers being rewritten & tests against exact solutions \\
     Who understands it & contested & \q{AI slop}, being digested & fully; it is my method \\
-    Cost & millions of dollars & own research funds & a subscription \\
+    Cost & millions of dollars & own research funds & \$200/mo 20x Max subscription \\
     \bottomrule
   \end{tabular}
   \vspace{10pt}
   \normalsize
   \begin{itemize}
-    \item The capability is real at both ends of this table.
+    \item The capability is impressive at all scales in this table.
     \item The difference is who steered, who can check it, and who is left
       understanding the result.
   \end{itemize}
