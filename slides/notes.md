@@ -27,8 +27,10 @@ Three things happened in two weeks. OpenAI said its AI settled a famous $1M
 question about fluids. The night before, an NYU mathematician and an
 Anthropic researcher published a year of closely related work, done with
 Claude and Codex. And I rebuilt my dissertation's simulation methods with
-Claude Code in a day. The thesis: "AI in research math" is two very different
-activities, and the difference is who steers and who can check the result.
+Claude Code in a day. The thesis: agents bring staggering programming and
+logical power; paired with a human's intuition in a field they make progress
+fast at every scale, from 10,000 agents to one assistant. What changes with
+scale is who can check the result and who ends up understanding it.
 
 ## 3. Part 1 section (1:30)
 
@@ -95,7 +97,7 @@ statement a mathematical community has made about AI; Tao's "non-renewable
 resource" line is the one to remember; Buckmaster's "Deep Blue–Kasparov";
 Bubeck's line shows the other frame, a capabilities demonstration. Right
 column: pick two and ask the room. Trust and compute get the most reaction
-with a tech audience. Then: "Part 2 is the other kind."
+with a tech audience. Then: "Part 2 is my end of the scale."
 
 ## 11. Part 2 section (14:30)
 
