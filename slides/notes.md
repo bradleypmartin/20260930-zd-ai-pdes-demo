@@ -125,8 +125,9 @@ is 2,500 points so the rows are visible; the runs use 10,000.
 
 The snapshot grid is the curved-interface case, matching the node picture on
 the previous slide; the error is against a 40,000-point interface-aware run
-because there is no exact solution for curved interfaces. Explain the four
-columns, then **play clip 3** (key `3`, 8 s), the curved case. **Clip 2**
+because there is no exact solution for curved interfaces. Explain the three
+columns (the reference wave, then each method's error map), then **play
+clip 3** (key `3`, 8 s), the curved case. **Clip 2**
 (key `2`, 8 s) is the flat case with the exact solution; play it if there is
 time. Watch the error maps: the standard error is born at the boundary and
 travels with the wave.
