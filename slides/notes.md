@@ -120,9 +120,13 @@ years and is still not proven. 30 nearest neighbours per stencil.
 
 ## 15. 2-D naive vs aware (20:00)
 
-Explain the four columns, then **play clip 2** (key `2`, 8 s) and **clip 3**
-(key `3`, 8 s). Watch the error maps: the standard error is born at the
-boundary and travels with the wave.
+The snapshot grid is the curved-interface case, matching the node picture on
+the previous slide; the error is against a 40,000-point interface-aware run
+because there is no exact solution for curved interfaces. Explain the four
+columns, then **play clip 3** (key `3`, 8 s), the curved case. **Clip 2**
+(key `2`, 8 s) is the flat case with the exact solution; play it if there is
+time. Watch the error maps: the standard error is born at the boundary and
+travels with the wave.
 
 ## 16. How fast the error shrinks (22:00)
 
