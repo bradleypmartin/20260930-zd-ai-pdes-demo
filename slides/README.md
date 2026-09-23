@@ -29,7 +29,9 @@ uv run python scripts/check_slide_quotes.py
 
 `talk.pdf` is committed with every change to the deck, so the PDF on `main`
 is always the current build. Run `./slides/build.sh` and commit `talk.tex`
-and `talk.pdf` together.
+and `talk.pdf` together. `build.sh` pins `SOURCE_DATE_EPOCH` to the talk
+date, so the same sources build a byte-identical `talk.pdf`; if a rebuild
+shows `talk.pdf` as modified, something the deck includes has changed.
 
 ## Videos
 

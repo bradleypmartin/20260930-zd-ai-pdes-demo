@@ -54,5 +54,8 @@ for src, dst in [
     w, h = im.size
     im.crop((0, int(0.105 * h), int(0.53 * w), h)).save(f"figures/{dst}.png")
 PY
+# tectonic stamps the build time into the PDF; pin it (to noon UTC on the talk
+# date, unless the caller sets one) so the same sources build the same bytes.
+export SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH:-1790769600}"
 tectonic talk.tex
 echo "wrote $here/talk.pdf ($(pdfinfo talk.pdf 2>/dev/null | awk '/^Pages/ {print $2}') pages)"
