@@ -24,18 +24,37 @@ two scales in one narrow slice of it: partial differential equations.
    material boundary, the interface-aware ones do not. All of it was built on
    2026-09-17.
 
-After the freeze, and not part of the talk: **Part 3**, an idea from my
-research that never got written up. A stencil crossing a material edge too
-steep for the grid to resolve is built from "seeds" continued through the
-edge by ODEs instead of monomials, on the same equispaced grid. Built and
-confirmed in 1-D on 2026-09-19, with a design note for 2-D:
-[`docs/stiff-features.md`](docs/stiff-features.md) (issue #27). The
-arXiv write-up of Part 3 is in [`paper/`](paper/README.md) (issue #51:
-drafted, assembled and packaged for submission on 2026-09-20, with the
-pre-submission decisions and the AI-assistance disclosure recorded in its
-README); [`LITERATURE.md`](LITERATURE.md) is its novelty ledger, where
-the claim is itemised and every "not found" is tied to the search that
-produced it (#53).
+## Part 3 moved
+
+After the freeze I kept going on something that is not in the talk: Part 3,
+an idea from my research that never got written up, and an arXiv manuscript
+about it. On 2026-09-22 both moved, with their history, to
+[`bradleypmartin/rbf-hyperbolic-interfaces-2026`](https://github.com/bradleypmartin/rbf-hyperbolic-interfaces-2026),
+which carries the Part 2 solvers forward too.
+
+- The tag
+  [`part3-pre-split`](https://github.com/bradleypmartin/20260930-zd-ai-pdes-demo/tree/part3-pre-split)
+  marks the state Part 3 lived in here, and every Part 3 pull request (#35
+  to #77) is in this history. Resolve the `git_sha` values in the results
+  cache through the new repo's
+  [commit map](https://github.com/bradleypmartin/rbf-hyperbolic-interfaces-2026/blob/main/docs/split-commit-map.txt),
+  not through this tag: three of them are commits of the #54 branch from
+  before its rebase, which never reached `main`.
+- This tree is `0a2a8a7` (#26, the last commit before Part 3) apart from
+  this README and `CLAUDE.md`. #78 regenerated the talk from it: the
+  figures, the clips frame for frame and the text of `slides/talk.pdf` all
+  came out as committed (the one pixel-level difference is explained on
+  #78). The commands, about five minutes in all:
+
+```sh
+uv run python scripts/wave1d_demo.py --n 100 --sharpness 150 --out outputs/wave1d_naive_vs_aware_coarse.mp4  # clip 1 and its still
+uv run python scripts/wave1d_convergence.py
+uv run python scripts/wave2d_nodes.py
+uv run python scripts/wave2d_demo.py                    # clip 2 and its still
+uv run python scripts/wave2d_demo.py --amplitude 0.02   # clip 3 and its still
+uv run python scripts/wave2d_convergence.py
+./slides/build.sh                                       # copy them into slides/, build talk.pdf
+```
 
 ## Talk materials
 
@@ -72,8 +91,6 @@ uv run python scripts/wave2d_eigenvalues.py   # operator spectrum with/without h
 uv run python scripts/wave2d_hyperviscosity.py  # error and stability vs hyperviscosity amplitude
 uv run python scripts/wave2d_convergence.py   # 2-D error vs resolution, flat and curved interfaces (Fig. 3-5 / 3-8)
 uv run python scripts/wave2d_demo.py          # clip 2: 2-D two-panel MP4 + snapshot PNG; --amplitude 0.02 for clip 3 (curved)
-uv run python scripts/wave1d_stiff.py         # Part 3: 1-D knee plot, snapshot and seeds through a stiff smooth edge
-uv run python scripts/wave2d_stiff.py         # Part 3: 2-D flat delta sweep, naive RBF-FD vs seed stencils through smooth edges, and a still (seed operators cached under outputs/)
 ```
 
 Both demo drivers take `--png-only` to refresh a still without re-rendering a
@@ -83,13 +100,12 @@ clip.
 
 | Path | Contents |
 | --- | --- |
-| `src/pdes_demo/` | Library. `wave1d/`: FD stencils across interfaces, RK4, exact ray-sum solution; for Part 3, smooth tanh edges, a Fourier pseudo-spectral reference and ODE-continued seed stencils. `wave2d/`: node sets, periodic kNN, Gaussian RBF-FD weights, interface-aware stencils, hyperviscosity, sparse elastic operators, RK4, analytic plane-wave reference, one-sided resampling; for Part 3, smooth tanh edges on flat interfaces and a spectral normal-incidence reference. Shared Fornberg weights and plotting palette. |
+| `src/pdes_demo/` | Library. `wave1d/`: FD stencils across interfaces, RK4, exact ray-sum solution. `wave2d/`: node sets, periodic kNN, Gaussian RBF-FD weights, interface-aware stencils, hyperviscosity, sparse elastic operators, RK4, analytic plane-wave reference, one-sided resampling. Shared Fornberg weights and plotting palette. |
 | `scripts/` | Drivers for the figures and clips; `check_slide_quotes.py` |
 | `tests/` | pytest suite (convergence and analytic checks) |
-| `docs/` | `demo-outline.md` (results tables, decisions log, what happened when), `navier-stokes-notes.md` (sourced notes for Part 1), `paper-index.md` (page ranges per PDF), `stiff-features.md` and `figures/` (Part 3) |
+| `docs/` | `demo-outline.md` (results tables, decisions log, what happened when), `navier-stokes-notes.md` (sourced notes for Part 1), `paper-index.md` (page ranges per PDF) |
 | `slides/` | `talk.tex` → `talk.pdf`, `notes.md` speaker script, `figures/`, `videos/` (the three clips), `clips.html` clip player, `build.sh` |
 | `papers/` | Index of reference papers with links and checksums, fetch script; PDFs are not committed |
-| `paper/` | The Part 3 manuscript: `main.tex` → `main.pdf` (tectonic), `references.bib`, `make_arxiv.py`; see its README |
 | `index.html` | GitHub Pages landing page |
 
 ## Reference papers
@@ -144,16 +160,11 @@ lists what was ported and what was not.
 - [x] Clip pass: re-rendered with the final palette, 1-D clip simplified,
       2-D still reduced to the reference wave and two error maps (2026-09-19)
 - [x] Docs pass (2026-09-19)
-- [x] Part 3, not in the talk: smooth-edged layer, spectral reference,
-      ODE-continued seed stencils, knee experiment, notes with verified
-      related work and a 2-D design note (2026-09-19)
-- [x] Part 3 manuscript in `paper/`: drafted, assembled, packaged for arXiv
-      with the acknowledgments and the AI-assistance disclosure (2026-09-20)
-- [ ] Submit the manuscript to arXiv (math.NA) and tag `manuscript-v1`
+- [x] Part 3 and its manuscript moved to their own repo; this tree back to
+      the talk (2026-09-22)
 - [ ] Rehearsal on Sep 29, then freeze and tag `talk-2026-09-30`
 
 ## License
 
-Code: [MIT](LICENSE). Manuscript (`paper/`): [CC BY 4.0](paper/LICENSE).
-Reference papers are the property of their respective authors and
+MIT. Reference papers are the property of their respective authors and
 publishers and are not redistributed here.

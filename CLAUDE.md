@@ -19,121 +19,15 @@ rehearsal, a freeze, and the `talk-2026-09-30` tag (issues #18, #19).
    RBF-FD on scattered nodes with curved interfaces, each verified against a
    reference solution. All of it landed on 2026-09-17.
 
-**Part 3 (not in the talk; #27, sub-issues #28–#34).** Started 2026-09-19
-after the freeze: Brad's never-published idea that a stencil crossing a
-material edge too steep for the grid can be built from ODE-continued
-"seeds" (the t = 0 profiles of time-polynomial solutions) instead of
-monomials, on the same equispaced grid. Built and confirmed in 1-D: naive
-FD4 has a knee at h = δ, the seed stencils are fourth order at every
-resolution, and the dissertation's jump construction is the δ → 0 limit.
-The 2-D chain (#36–#42, flat first, curved last) has started: #36 added
-smooth flat edges to `LayeredMedium2D` and a normal-incidence reference
-from the 1-D spectral solver; #37 measured the naive RBF-FD baseline
-(`scripts/wave2d_stiff.py`): the resolution floor hides most of the edge
-error in v; the spurious u (exactly 0 in the true solution) separates
-unresolved from resolved edges 10× more sharply; #38 built the elastic seeds
-(`wave2d/seeds.py`): all 30 seeds of one stencil march as one 600-state
-ODE system in the normal coordinate, anchored at the evaluation node, with
-constant-material, jump-limit, residual and conditioning checks; #39 built
-`seed_weights` and the dispatch in `build_operators(mode="aware")` for
-smooth edges (19-node seed rows for the elastic operator, Δ³ rows on the
-naive 30-node footprint with the seeds annihilated) and answered the
-stability question: stable at the standard γ at every δ
-(`scripts/wave2d_stiff_eigenvalues.py`); at n = 2500, δ = h/8 the seeds
-cut the spurious u 5.6× and v below the naive floor. #40 ran the flat δ
-sweep (`scripts/wave2d_stiff.py`, naive vs seeds at every (n, δ), seed
-marches on a process pool, operators cached under `outputs/`): through
-an edge the nodes never resolve (δ = 0.0025) the seeds are fourth order
-at every n, 20× below naive in v and 67× in spurious u at 19,600 nodes,
-at their own floor, half the naive one; the crossover is at h ≈ δ and a
-resolved edge (δ = 0.04) is 1.4–2× worse seeded, so the rule is seed
-when δ ≤ h. #41 sent a plane-wave train in at 26.6° (`oblique_p_wave`,
-`--direction 1 2`) against a Fourier-in-x reference (`wave2d/spectral.py`,
-one complex pseudo-spectral system per x-mode): seeds beat naive 1.4–1.9×
-and the x'-dependent seeds are essential through a sharp edge (the
-ablation, `seed_tangential=False`, is worse than naive), but every scheme
-converges at about 2.5 there, the jump-aware stencils included, because
-the mode-converted S waves are 1.73× finer than the pulse and sit at a
-pre-asymptotic floor on these node sets; compare oblique runs against a
-floor with the converted waves in it. #42 (curved, the last of the
-chain): the medium blends in the true signed normal distance
-(`SineInterface.signed_distance`, one band image per point), the seeds
-march along the true normal through the stencil's foot point (route (a),
-zeroth order in curvature, the same approximation as the jump stencils),
-and a product-grid Fourier solver (`wave2d/spectral.py: run_fourier_2d`,
-`GridState`) is the reference for δ > 0, a 122,500-node jump-aware run
-for δ = 0 (`scripts/wave2d_stiff.py --amplitude 0.02`, both cached under
-`outputs/`). Results: the curved jump stencils sit at the resolution
-floor at every n (3.6th order to 19,600 nodes); through δ = 0.005 the
-curved seeds sit at the seed operator's own floor at every n, 2.2–7×
-below naive, and through δ = 0.01 the curved numbers equal the flat ones,
-crossover at h = δ as before; the seed rows' truncation error on the
-true curved solution converges at the bulk rate; through δ = 0.0025 the
-seeds are 3–12× below naive and route (a)'s geometry first shows (1.5×
-the flat seeds at 19,600 nodes, level with the seed floor), so route
-(b) is not needed on these node sets and would start to be beyond
-them at δ ≤ h/3; the spectra at 2500 nodes are the flat ones.
-The fine-end rate of the seeds (2.3–2.6) is the 19-node degree-3 rows
-covering the 19δ tails, not the edge (`--seed-rtol` trims them).
-#69 (2026-09-20) ran the standing alternative head to head, the same
-scheme on a changed medium (`wave1d/treatments.py`, `wave2d/treatments.py`;
-`--comparators`, `--modes widen1 widen2 cell cell2 bandlimit`): cell means
-of compliance and density over one and two cells (Tornberg–Engquist 2006
-eq. 18/22 at a jump, the Moczo line), band-limited coefficients (Koene et
-al. 2022 §3.3) and the widened edge, against the true-δ reference. 1-D
-(notes §2.1): at a jump only the two-cell mean lifts the order, to two;
-through an unresolved edge the treatments gain 1.25–11× on sampling while
-the seeds are 3–580× below the best of them; on a resolved edge every
-treatment at its prescribed width is second order. 2-D (§5.7): the one-cell
-mean gains up to 3.6× on sampling through δ = 0.0025 with the seeds
-3.1–5.9× below it, the widened edge is 5–120× worse than sampling, and the
-treatments cross above sampling at h ≈ 1.4–2δ. No coefficient treatment
-reaches the seeds' order; Schoenberg–Muir (T3) not built.
-Derivation in `docs/stiff-features.md` §4, results in §5 (§5.6 curved,
-§5.7 comparators).
-
-**Manuscript (#51, sub-issues #52–#62).** `paper/` holds the arXiv-ready
-write-up of Part 3 (amsart, tectonic, `references.bib`, `make_arxiv.py`;
-the `paper/` pattern of Brad's weil-positivity-lab, bolza-bending and
-dirichlet-bridge repos). Merged 2026-09-20: #52 scaffold, #53 literature
-pass (`LITERATURE.md` buckets the novelty claim and §6 there holds the
-only novelty wording the manuscript may use; 66 verified bib entries, no
-unverified citation ships), #54 results cache `paper/data/` with the
-print-style figures and `tab_*.tex` fragments from
-`scripts/paper_figures.py` (`--check` gates byte identity), #55 §1–2,
-#56 §3, #57 §4, #58 §5; #59 §6 drafted (all 14 `tab_2d_*` / `tab_spectra_*`
-fragments and the eight 2-D figures placed); #69 measured comparison
-(the standing alternative in §4 and §6, the §1 sentence and the §7 stub
-rewritten, `LITERATURE.md` K6 and §6b rewritten from "not run" to the
-measured statement with its scope; T3 Schoenberg–Muir stays excluded).
-#60 §7 drafted (limitations that cross-reference §2.4 and add what
-the experiments leave open, future work in the order to do it with the
-curvilinear evaluation first, conclusions quoting `LITERATURE.md` §6b
-verbatim). #61 assembly (2026-09-20): every number re-checked against the
-notes and the cache, the cache-backed ones asserted by
-`scripts/paper_numbers.py`; the notes' floor-row rates corrected from the
-cache; notation list in §2; `\nocite{*}` gone; floats barriered per §6
-subsection; UTF-8 surnames fix the `amsalpha` labels; ledger §6a
-synchronised with §1.1. #62 packaging (2026-09-20): `make_arxiv.py`
-stages the `tab_*.tex` fragments too, strips whole-line comments, runs
-`paper_numbers.py` and `paper_figures.py --check`, rebuilds the staged
-tree and compares its text with `main.pdf`, and checks the accented
-labels render; the stub gave way to the acknowledgments (Fornberg) and a
-*Tool and computational resource disclosure* section in the form of the
-Leiden Declaration (Claude Fable 5.1 via Claude Code for the derivation,
-the code and the drafting; GPT-5.6 Sol and GPT-6 Astra as referees;
-Claude Sonnet on the code); §1 item 6 links the `manuscript-v1` tag; the
-decisions (math.NA + physics.comp-ph, endorsement, CC BY 4.0, date,
-length) and a survey of recent disclosures are in `paper/README.md`.
-Left to Brad: the submission and the tag.
-`docs/stiff-features.md` stays canonical: the manuscript quotes it, every
-number traces to a notes section or the results cache, and a `% TRACE`
-comment per section names the source. Figures and tables come from
-committed scripts, never hand-edited; `\sci{m}{e}` and `\tablesetup` in
-`main.tex` are what the fragments assume. Notation fixed in §2 (the
-`% NOTATION` comment): 2-D stresses are σ_xx, σ_xy, σ_yy (the code's f, g,
-h; h stays the spacing), K = λ + 2μ, local frame (x′, y′) with y′ normal,
-anchor x_e. One sub-issue per PR, in the dependency order on #51.
+**Part 3 moved (2026-09-22).** Part 3 (ODE-continued seed stencils, built
+after the freeze and not in the talk) and its arXiv manuscript moved with
+their history to `bradleypmartin/rbf-hyperbolic-interfaces-2026`
+(bradleypmartin/rbf-hyperbolic-interfaces-2026#1). The tag
+`part3-pre-split` marks the state they lived in here. This tree is
+`0a2a8a7` (PR #26) apart from `README.md` and `CLAUDE.md`, and #78 proved
+it regenerates the talk (commands in the README). The 1-D and 2-D solvers
+are forked, not shared: frozen here at the talk state, evolving there.
+Part 3 and manuscript work goes there, never here.
 
 Audience: bright tech workers with no assumed PDE background. **No live
 coding.** The deliverables are `slides/talk.pdf` (19 pages), three clips in
@@ -152,60 +46,30 @@ Papers: `papers/README.md`. **Before reading a PDF, check
 src/pdes_demo/   library code
   fd_weights.py    Fornberg FD weights (shared)
   plotting.py      matplotlib style; blue = interface-aware, orange = naive;
-                   aqua / violet single-hue maps for 2-D fields / errors;
-                   use_print_style() for the manuscript (text width,
-                   SOURCE_DATE_EPOCH pinned so PDFs are byte-identical)
-  results_cache.py JSON results cache the stiff drivers write (#54): errors,
-                   rates, truncation, snapshot and spectra records + provenance
-  stiff_figures.py Part 3 figures drawn from cache records (1-D / 2-D
-                   convergence) and the seed-basis figures (1-D, 2-D sections)
-  stiff_tables.py  booktabs table fragments from the cache (\sci{m}{e})
-  wave1d/          domain.py (periodic grid, piecewise-constant materials
-                   with optional tanh edges, pulse) / operators.py (naive vs
-                   interface-aware differentiation matrices, thin-layer
-                   double-cross; smooth edges dispatch to stiff.py) /
-                   simulate.py (RK4) / exact.py (ray-sum reference solution) /
-                   spectral.py (Fourier pseudo-spectral reference for smooth
-                   edges) / stiff.py (ODE-continued seed stencils, Part 3) /
-                   treatments.py (the standing alternative, #69: cell-averaged
-                   and band-limited coefficients, the widened edge, as a
-                   Medium1D for the naive scheme)
-  wave2d/          domain.py (materials, sine interfaces with optional tanh
-                   edges for flat interfaces, interface-straddling node sets
-                   by repulsion; signed normal distance for curved smooth
-                   edges) / neighbors.py (periodic kNN via
+                   aqua / violet single-hue maps for 2-D fields / errors
+  wave1d/          domain.py (periodic grid, piecewise-constant materials,
+                   pulse) / operators.py (naive vs interface-aware
+                   differentiation matrices, thin-layer double-cross) /
+                   simulate.py (RK4) / exact.py (ray-sum reference solution)
+  wave2d/          domain.py (materials, sine interfaces, interface-straddling
+                   node sets by repulsion) / neighbors.py (periodic kNN via
                    cKDTree boxsize) / rbf.py (Gaussian RBF-FD weights with
                    polynomial augmentation, batched) / interface.py
                    (interface-aware stencils, dissertation §3.3) /
                    operators.py (sparse dx, dy, hyperviscosity, 5-field block
                    operator) / simulate.py (RK4) / exact.py (flat-interface
-                   plane-wave references: ray sum for a jump, 1-D spectral
-                   solver for smooth edges) / resample.py (one-sided
-                   interpolation to pixel grids and other node sets) /
-                   seeds.py (elastic seed bases marched in the normal
-                   coordinate, along the true normal for a curved edge,
-                   Part 3) / spectral.py (Fourier-in-x reference for
-                   oblique incidence on flat media; product-grid reference
-                   for curved smooth media, Part 3) / treatments.py (#69:
-                   cell means and band-limited coefficients on scattered
-                   nodes for the naive operator)
+                   plane-wave reference) / resample.py (one-sided interpolation
+                   to pixel grids and other node sets)
 scripts/         drivers that write figures and clips to outputs/;
-                 check_slide_quotes.py; paper_figures.py (the manuscript's
-                 figures and tables from paper/data/, #54)
-tests/           pytest, 245 tests; every numerical routine has one
-docs/            demo-outline.md, navier-stokes-notes.md, paper-index.md,
-                 stiff-features.md (Part 3) with its figures in figures/
+                 check_slide_quotes.py
+tests/           pytest, 106 tests; every numerical routine has one
+docs/            demo-outline.md, navier-stokes-notes.md, paper-index.md
 slides/          talk.tex → talk.pdf (committed), notes.md (speaker script with
                  clip cues), clips.html (keyboard clip player), figures/ and
                  videos/ (committed; build.sh refreshes them from outputs/),
                  build.sh, README.md
 papers/          reference PDFs (gitignored), fetch_papers.sh, README.md with
                  sources and checksums
-paper/           the Part 3 manuscript (#51): main.tex → main.pdf (committed),
-                 references.bib, data/ (the results cache, one JSON per
-                 driver run), figures/ (PDFs and tab_*.tex fragments from
-                 scripts/paper_figures.py, never hand-edited), make_arxiv.py,
-                 README.md, LICENSE (CC BY 4.0; code stays MIT)
 outputs/         generated artifacts (gitignored)
 index.html       GitHub Pages landing page (.nojekyll at the root)
 ```
@@ -217,44 +81,10 @@ uv sync                                       # .venv, Python 3.13
 uv run pytest                                 # tests
 uv run ruff check . && uv run ruff format .
 uv run python scripts/<driver>.py             # figures / clips into outputs/
-uv run python scripts/wave1d_stiff.py         # Part 3 figures, ~50 s (references
-                                              # cached in outputs/); --comparators adds
-                                              # the coefficient treatments of #69 (50 s)
-uv run python scripts/wave2d_stiff.py         # Part 3 2-D flat δ sweep, naive vs seeds,
-                                              # and a still: ~11 min on 12 workers, ~4 min
-                                              # once the seed operators are cached in outputs/
-uv run python scripts/wave2d_stiff.py --direction 1 2 --widths 0.0025 0.01 \
-    --modes naive aware ablate --seed-floor   # #41 oblique sweep, ~8 min from the cache
-uv run python scripts/wave2d_stiff.py --amplitude 0.02 --widths 0 0.005 0.01 \
-    --seed-floor --truncation --snapshot-width 0.005   # #42 curved sweep: ~12 min from
-                                              # the caches, ~2 h to build them (references
-                                              # 4–35 min each, seed operators 1–8 min each)
-uv run python scripts/wave2d_stiff.py --modes naive widen1 widen2 cell cell2 bandlimit \
-    --widths 0.0025 0.01 --no-snapshot        # #69 comparators, flat (~7 min from the
-                                              # caches); --amplitude 0.02 --widths 0.0025
-                                              # 0.005 0.01 for curved (~15 min)
-uv run python scripts/wave2d_stiff_eigenvalues.py   # Part 3 2-D spectra, seed vs naive,
-                                              # ~10 min at n = 900; --n 2500 --run ~25 min;
-                                              # --amplitude 0.02 for the curved geometry
-uv run python scripts/wave2d_demo.py --amplitude 0.02 --edge-width 0.005   # #42 curved
-                                              # smooth-edge clip vs the product-grid reference
-uv run python scripts/wave1d_stiff.py --data-dir paper/data   # any stiff driver: also write
-                                              # its results JSON to paper/data (the committed
-                                              # cache); --style print --format pdf for the
-                                              # manuscript's look
-uv run python scripts/paper_figures.py        # paper/figures/ from paper/data/: ~10 s;
-                                              # --all adds the stills and spectra through the
-                                              # drivers (~50 min from the outputs/ caches, the
-                                              # two n = 2500 spectra most of it); --check
-                                              # verifies byte identity of the cached set
 ./slides/build.sh                             # copy figures and clips from outputs/,
                                               # crop, tectonic → slides/talk.pdf
 uv run python scripts/check_slide_quotes.py   # every \q{} in talk.tex is in the notes
 ./papers/fetch_papers.sh                      # public papers, checksum-checked
-(cd paper && tectonic main.tex)               # the manuscript → paper/main.pdf
-(cd paper && tectonic --keep-intermediates main.tex && uv run python make_arxiv.py)
-                                              # arXiv tarball: repo checks, comment
-                                              # stripping, rebuild-and-compare gate, ~1 min
 ```
 
 Clip renders are listed in `slides/README.md`. Both demo drivers take
@@ -278,15 +108,8 @@ Clip renders are listed in `slides/README.md`. Both demo drivers take
   scare quote.
 - Clips: iterate in `outputs/`; copy into `slides/videos/` and commit only
   when the content changed (ffmpeg output is not byte-identical run to run).
-- Part 3 figures referenced from `docs/stiff-features.md` are committed
-  under `docs/figures/` so the notes read on GitHub; nothing of Part 3
-  touches the deck or the clips.
 - Deck and clip passes go one item at a time, one commit per item, so the PR
   history reads item by item.
-- Manuscript: after any edit under `paper/`, rebuild with tectonic, look at
-  the changed pages with `pdftoppm`, and commit `main.pdf` with the source.
-  `\date` is fixed by hand, never `\today`. Section stubs are `\stub{}`
-  lines, visible in the PDF until the owning sub-issue replaces them.
 
 ## Hard constraints
 
@@ -296,8 +119,7 @@ Clip renders are listed in `slides/README.md`. Both demo drivers take
 - `papers/*.pdf` and `outputs/` are gitignored on purpose; don't un-ignore.
   `slides/figures/`, `slides/videos/` and `slides/talk.pdf` are committed on
   purpose so the talk is self-contained from a fresh clone, and `talk.pdf` is
-  committed on every deck change. `paper/main.pdf` likewise, on every
-  manuscript change.
+  committed on every deck change.
 - Don't fabricate details about the OpenAI paper or its reception. Everything
   stated in `docs/` and on the slides must trace to a source we've read (PDF
   in `papers/` or a URL cited inline).

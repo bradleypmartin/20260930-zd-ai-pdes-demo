@@ -279,7 +279,7 @@ for the deck. It landed in two working days.
 | Date | Work |
 | --- | --- |
 | Sep 17 | Scaffold, papers, plan. 1-D port with the exact ray-sum reference (#4). 2-D in five PRs: node sets (#10), RBF-FD weights and sparse operators (#11), RK4 with analytic validation and the hyperviscosity study (#12), interface-aware stencils (#14), clips, convergence figure and one-sided resampler (#15). Coarse 1-D clip (#16). Sourced Navier–Stokes notes, Beamer deck, speaker script, `clips.html` (#17). GitHub Pages (#20). Four bugs found and fixed the same day: a ray-pruning sign error and two latent exact-solver bugs in 1-D, a driver crash in 2-D. |
-| Sep 19 | Deck culled to seven content slides per part, no backups (#21). Slide-by-slide tweak pass (#22). Spot changes: new title and thesis, aqua/violet 2-D maps, convergence factors corrected (#23). Video pass: clips re-rendered, 1-D clip without the exact curve or legends, 12/16 still reduced to three columns (#25). Docs pass (#19). Part 3 after the freeze (#27, not in the talk): smooth tanh edges, spectral reference, ODE-continued seed stencils, knee experiment, notes with verified related work and a 2-D design (#28–#34). |
+| Sep 19 | Deck culled to seven content slides per part, no backups (#21). Slide-by-slide tweak pass (#22). Spot changes: new title and thesis, aqua/violet 2-D maps, convergence factors corrected (#23). Video pass: clips re-rendered, 1-D clip without the exact curve or legends, 12/16 still reduced to three columns (#25). Docs pass (#19). |
 | Sep 20–28 | Watch Clay and OpenAI for updates; update the timeline slide if anything moves. |
 | Sep 29 | Rehearse with `slides/notes.md`; trim 8/16 then 14/16 if long; freeze; tag `talk-2026-09-30`. |
 | Sep 30 | Talk. |
@@ -350,95 +350,3 @@ for the deck. It landed in two working days.
   each method's error map, because the two solvers' waves cannot be told
   apart by eye at 10,000 nodes; the clips keep both waves. Clips stay at
   120 dpi and the 2-D ones square.
-- 2026-09-19: Part 3 (#27) is an exploration after the freeze and is not in
-  the talk, the deck or the clips. It lives in `docs/stiff-features.md`,
-  `wave1d/stiff.py`, `wave1d/spectral.py`, `LayeredMedium(edge_width=...)`
-  and `scripts/wave1d_stiff.py`; sub-issues #28–#34 land in one PR with one
-  commit each (nobody is merging in real time), not the second docs PR
-  announced on #27.
-- 2026-09-19: The seeds are the t = 0 profiles of solutions polynomial in
-  time (Brad's bullets with ∂ₜᵏu = C, C ≠ 0), which makes the dissertation's
-  jump construction the δ → 0 limit of the same chain; `mode="aware"`
-  covers both, algebra for a jump and an ODE march for a smooth edge.
-- 2026-09-19: References for smooth edges are pseudo-spectral (the ray sum
-  needs jumps). The knee experiment uses a wider pulse (sharpness 60,
-  centre −0.6) so the coarse grids resolve the pulse and only the edge is
-  under test; with the dissertation pulse the interior dispersion error
-  hides the edge effect below n = 400.
-- 2026-09-19: Part 3 figures are committed under `docs/figures/` (525 KB);
-  `outputs/` stays gitignored, including the cached spectral references.
-- 2026-09-19: The 2-D proof of concept for Part 3 goes flat first (Brad):
-  sub-issues #36–#42 in order, one PR each, so the principles and the
-  RBF-FD stability question are settled on a case with an independent
-  reference before curvature enters. #36: `LayeredMedium2D(edge_width=…)`
-  blends λ, μ, ρ linearly in the tanh weight (so K = λ + 2μ is linear and
-  c_p is not, unlike the 1-D medium, which blends c and ρ); the
-  normal-incidence reference `spectral_plane_wave` therefore maps the 2-D
-  profiles pointwise into the 1-D spectral solver instead of building a
-  `LayeredMedium(edge_width = 2δ)`, and hands it the exact image of the 2-D
-  initial state so that f follows from f = f₀ + λ/(λ+2μ) (h − h₀) exactly.
-- 2026-09-19: The 2-D naive baseline (#37) reports both the dissertation
-  pulse and a wider one (sharpness 15, centre 0.875), reads the wider one,
-  and uses fixed δ columns as in 1-D rather than δ ∝ h. The resolution
-  floor hides most of the edge error in v at our node counts, so the
-  spurious u (exactly zero in the true solution) is the primary measure of
-  edge error for the rest of the chain; the eigenvalue driver takes
-  `--edge-width` and defaults to flat interfaces with it.
-- 2026-09-19: The 2-D seeds (#38, `wave2d/seeds.py`) are anchored at the
-  evaluation node in both coordinates and scaled by r_max, the 1-D lesson
-  for the normal coordinate; the polynomial basis of `interface.py` keeps
-  its interface origin and is untouched, since moving the origin is a
-  change of basis within the same span (`shift_matrix`), so the jump path
-  stays bit for bit. All 30 seeds of a stencil march as one linear ODE
-  system, restarted at every node and at the edge flanks (a single solve
-  without the flanks is off by 4e-10 at δ = 1e-4). The stress seeds drop
-  the same three rigid-motion columns as the polynomial basis because the
-  shear pair shares its stress through any edge, not just for constant
-  coefficients. Hyperviscosity rows for seed stencils (impose Δ³ = 0 on
-  the seed space, or not) are an eigenvalue question deferred to #39.
-- 2026-09-19: Seed-augmented stencils (#39). Hyperviscosity annihilates
-  the seed space (Brad's call), but on the naive 30-node footprint, not
-  the 19-node interface stencil: a 19-node Δ³ row carrying 20 coupled
-  constraints has half the naive damping and turns the operator unstable
-  at the MATLAB γ once the seed rows fill the domain (δ ≥ h/2), which a
-  plain 19-node scheme does even without seeds. The fix, a second seed
-  march on 30 nodes for the Δ³ rows, is stable at every δ at the standard
-  γ with the straddling rows kept; the 30-node degree-4 stencils are
-  unstable across a sharp feature for the jump path too, so the elastic
-  rows stay at 19 nodes and degree 3. `seed_weights` lives in
-  `wave2d/seeds.py` (not `interface.py` as the issue said) to avoid a
-  circular import; `interface.py` exposes `gaussian_rows` and
-  `coupled_weights` for any augmenting basis, jump path bit for bit.
-- 2026-09-19: Flat δ sweep (#40). Seed every row that sees the edge at
-  every (n, δ) and let the sweep set the rule, instead of hard-coding the
-  δ ≤ h/4 guess of #39: the crossover sits at h ≈ δ (the δ = 0.01
-  panel), so the rule is "seed when δ ≤ h, naive otherwise", per edge.
-  Through an edge the nodes never resolve (δ = 0.0025) the seeds are
-  fourth order at every n and land at their own resolution floor, which
-  is half the naive scheme's (measured by seeding through a 10⁻⁶
-  contrast); why the mix of 19-node seed rows and 30-node annihilating
-  Δ³ rows beats 30/4 on this pulse is left open (§5.4). The seed marches
-  run on a process pool (`build_operators(workers=...)`, bit for bit the
-  serial weights) and the driver caches seed operators under `outputs/`,
-  which turns an hour of marches into ten minutes once and four from
-  then on.
-- 2026-09-19: Oblique incidence (#41). The pulse is the doubly periodic
-  plane-wave train along a lattice direction ((1, 2), 26.6°), because a
-  tilted plane pulse on the periodic square cannot avoid the band; it
-  carries the background eigenvector everywhere, after the local
-  eigenvector proved to inject a sub-grid traction jump that every
-  scheme then measured instead of the edge. The reference is option (i),
-  Fourier in x with one complex pseudo-spectral system per mode
-  (`wave2d/spectral.py`), cheaper than the 4× finer seed run the issue
-  suggested first and reusable for #42. Result: the seeds beat naive by
-  1.4–1.9× and the x'-dependent seeds are essential through a sharp
-  edge (without them the seeds are worse than naive), but the order is
-  2.5, not 4, and that is the resolution floor of the mode-converted S
-  waves (1.73× finer than the incident pulse, pre-asymptotic on these
-  node sets), which the jump-aware stencils of Part 2 share (2.4 at
-  oblique incidence, never measured before) and which the P train's own
-  floor does not see (§5.5). Six diagnostics in the notes; the S pulse
-  at normal incidence is fourth order at half the floor, so the
-  u-component seeds are fine. Forecast for #42: measure the jump-aware
-  operator's order at curved interfaces against a floor that contains
-  the converted waves before judging the curved seeds.
