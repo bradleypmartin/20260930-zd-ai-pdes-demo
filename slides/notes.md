@@ -1,7 +1,8 @@
 # Speaker script, 30 minutes
 
-Nineteen PDF pages: title, a framing slide, two section slides, seven content
-slides per part, and a links slide for the Q&A. Headings give the PDF page,
+Twenty PDF pages: title, a framing slide, two section slides, seven content
+slides per part, and two links slides for the Q&A (the second, on ML, is
+unnumbered, so footers stay n/16). Headings give the PDF page,
 the footer number printed on the slide (content slides only, n/16), and the
 start time. Timings assume about two minutes per content slide, with the
 clips inside Part 2. Rehearse on Sep 29; if it runs long, trim the reactions
@@ -15,6 +16,7 @@ to play each from the start); the files are in `slides/videos/`.
 | 3–10 | 2–8/16 | 1:30–14:30 | Part 1, seven slides |
 | 11–17 | 9–14/16 | 14:30–26:00 | Part 2, seven slides, three clips (~30 s total) |
 | 18–19 | 15–16/16 | 26:00–30:00 | Comparison table; links; questions |
+| 20 | none | Q&A | Optional: ML links |
 
 ## 1. Title (0:00)
 
@@ -176,11 +178,22 @@ questions: steering, judging what matters, designing the verification.
 The table. Capability is real at both ends. The difference is steering,
 checking, and understanding.
 
-## 19. For the curious (16/16, 27:30)
+## 19. For the curious -- more PDEs (16/16, 27:30)
 
 Point at the gentle starts. Repo link, which has the equations, the
 stability figure, and the numbers behind the convergence plots for anyone
 who wants the detail. Open for questions.
+
+## 20. For the curious -- ML applications (unnumbered, optional)
+
+For the ML-leaning part of the room; put it up if questions turn to "what
+about my work". One line: the same pattern as Part 2. Agents with a measurable
+target, an automatic correctness check and a person steering got real wins,
+idealo's production ranking endpoint being the closest to our own work. The
+failures came from unlocked scorers, wrong baselines, and agents grading their
+own homework. Prolific's study makes the thesis in one number: an eight-hour
+plateau, broken by a five-minute human steer. Sources and checks:
+`docs/ml-links.md`.
 
 ## If asked (Part 1, Q&A only; not on the slides)
 
