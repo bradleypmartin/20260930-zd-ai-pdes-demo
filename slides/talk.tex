@@ -483,7 +483,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{For the curious}
+\begin{frame}{For the curious -- more PDEs}
   \footnotesize
   \textbf{Gentle starts}
   \begin{itemize}
@@ -505,5 +505,41 @@
     \item Code, tests, figures, the equations, and these notes: \href{https://github.com/bradleypmartin/20260930-zd-ai-pdes-demo}{github.com/bradleypmartin/20260930-zd-ai-pdes-demo} (MIT)
   \end{itemize}
 \end{frame}
+
+% Optional, for Q&A: most of the room works on applied ML rather than PDEs.
+% Unnumbered, like the title and section frames, so footers stay n/16. Links
+% and the checks behind each one-line summary are in docs/ml-links.md.
+{\setbeamertemplate{frame numbering}[none]
+\begin{frame}[noframenumbering]{For the curious -- ML applications}
+  \footnotesize
+  \textbf{The pattern}
+  \begin{itemize}
+    \item \href{https://github.com/karpathy/autoresearch}{Andrej Karpathy, \emph{autoresearch}} (Mar 2026): edit, train 5 minutes,
+      keep or revert, repeat overnight.
+  \end{itemize}
+  \textbf{Went well, with a human steering}
+  \begin{itemize}
+    \item \href{https://medium.com/idealo-tech-blog/one-hour-37-faster-applying-autoresearch-to-our-search-ranking-inference-endpoint-34cffc08e373}{idealo} (Apr 2026): an hour of Claude Code, about \$7: search ranking
+      37\% faster, same output.
+    \item \href{https://developer.nvidia.com/blog/winning-a-kaggle-competition-with-generative-ai-assisted-coding/}{Chris Deotte, NVIDIA} (Apr 2026): three agents, 850 experiments, first
+      place in a Kaggle competition.
+    \item \href{https://ykumar.me/blog/eclip-autoresearch/}{Yogesh Kumar} (Mar 2026): 42 runs halved his model's mean rank; the
+      biggest win was a bug in his code.
+    \item \href{https://sankalp.bearblog.dev/autoresearch/}{sankalp} (Jul 2026): a GPU kernel 232$\times$ faster in 14 days; the
+      agent kept stalling in local maxima.
+  \end{itemize}
+  \textbf{Cautionary tales}
+  \begin{itemize}
+    \item \href{https://www.cerebras.ai/blog/how-to-stop-your-autoresearch-loop-from-cheating}{Cerebras} (Mar 2026): left overnight, the agent dropped the experiment
+      and started one of its own.
+    \item \href{https://lambda.ai/blog/what-happens-when-claude-code-gets-an-experiment-tracker}{Lambda} (Jun 2026): given the chance, Claude soon finds it can skip the
+      model and solve the puzzle itself.
+    \item \href{https://skypilot.ai/blog/research-driven-agents}{SkyPilot} (Apr 2026): a parsing bug in the benchmark script;
+      experiments ran against the wrong baseline.
+    \item \href{https://simonwillison.net/2026/Mar/18/llm-in-a-flash/}{Simon Willison} on Flash-MoE (Mar 2026): the agent judged 2-bit as
+      good as 4-bit; it broke tool calling.
+  \end{itemize}
+\end{frame}
+}
 
 \end{document}
