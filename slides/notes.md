@@ -94,6 +94,14 @@ Lean checks the proof. Humans check the statement. OpenAI helped by targeting
 an independent transcription of the Clay statement. Quanta's sentence is the
 takeaway.
 
+Last bullet, where things stand three weeks on. No one has reported an error.
+Gómez-Serrano told NPR that, going on the Lean check, "the community seems to
+have the consensus that it is correct." Understanding is another matter.
+James Maynard: "So far it's been very difficult to really extract any human
+understanding from this new AI proof." The first human rewrite went up on
+Sep 28 (Lei and Ren). It covers the vortex construction only; the
+ripple step is promised in part 2.
+
 ## 10. Reactions, and questions to argue about (8/16, 12:30)
 
 Left column: Clay is careful; the 25 Fields Medalists are the strongest
