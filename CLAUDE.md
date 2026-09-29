@@ -5,34 +5,50 @@
 Material for Brad's 30-minute talk to Ziff Davis coworkers on **2026-09-30**,
 *AI and Applied Math circa September 2026: excitement, ethics, and individual
 exploration*. Thesis: one pattern at every scale, agents' power paired with a
-human's intuition in a field. Everything is built; what remains is the Sep 29
-rehearsal, a freeze, and the `talk-2026-09-30` tag (issues #18, #19).
+human's intuition in a field. Everything is built and was rehearsed on
+2026-09-29; the tag `talk-2026-09-30` marks the talk state (#19).
 
 1. **Navier–Stokes (~15 min).** OpenAI's 2026-09-08 claim of finite-time
    blowup for 3-D Navier–Stokes (166-page manuscript + Lean 4 certificates),
    the parallel Alpöge–Buckmaster result and the credit dispute, and what
    "machine-checked" does and does not mean. Sourced notes in
-   `docs/navier-stokes-notes.md`.
+   `docs/navier-stokes-notes.md`, last re-checked 2026-09-29; what stays off
+   the slides is in the "If asked" section of `slides/notes.md`.
 2. **Working with Claude (~15 min).** Brad and Claude re-derived and ported to
    Python the interface-aware wave solvers from Brad's 2016 CU Boulder
    dissertation: 1-D finite differences through a layer, and 2-D elastic
    RBF-FD on scattered nodes with curved interfaces, each verified against a
    reference solution. All of it landed on 2026-09-17.
 
-**Part 3 moved (2026-09-22).** Part 3 (ODE-continued seed stencils, built
-after the freeze and not in the talk) and its arXiv manuscript moved with
-their history to `bradleypmartin/rbf-hyperbolic-interfaces-2026`
-(bradleypmartin/rbf-hyperbolic-interfaces-2026#1). The tag
-`part3-pre-split` marks the state they lived in here. This tree is
-`0a2a8a7` (PR #26) apart from `README.md` and `CLAUDE.md`, and #78 proved
-it regenerates the talk (commands in the README). The 1-D and 2-D solvers
-are forked, not shared: frozen here at the talk state, evolving there.
-Part 3 and manuscript work goes there, never here.
+**Parts 3–5 live elsewhere; none of that work goes here.**
+
+- **Part 3:** ODE-continued seed stencils for the wave equation, built after
+  the freeze and not in the talk. It and its arXiv manuscript moved with their
+  history to `bradleypmartin/rbf-hyperbolic-interfaces-2026` on 2026-09-22
+  (bradleypmartin/rbf-hyperbolic-interfaces-2026#1). The tag
+  `part3-pre-split` marks the state they lived in here.
+- **Part 4:** the analogue of Part 3 for elliptic and parabolic equations, in
+  `bradleypmartin/rbf-elliptic-parabolic-interfaces-2026` (public).
+- **Part 5:** wave-equation inverse problems (full-waveform inversion), in
+  `bradleypmartin/hyperbolic-inverses-intro-2026`. It is private until its
+  compute campaigns and manuscript are ready.
+
+The code here (`src/`, `scripts/`, `tests/`) and the clips are exactly as at
+`0a2a8a7` (PR #26), and #78 proved that code regenerates the talk (commands
+in the README). Since then:
+- #81 re-rendered the 1-D convergence figure from that code and pinned
+  `SOURCE_DATE_EPOCH`, so `talk.pdf` builds byte for byte.
+- #82 and #83 changed the deck, the script and the docs.
+
+The 1-D and 2-D solvers are forked, not shared: they are frozen here at the
+talk state and evolving in Part 3's repo.
 
 Audience: bright tech workers with no assumed PDE background. **No live
 coding.** The deliverables are `slides/talk.pdf` (20 pages), three clips in
 `slides/videos/` played from `slides/clips.html`, and the speaker script
-`slides/notes.md`. GitHub Pages serves `main` at
+`slides/notes.md`. The deck ends with an optional, unnumbered ML-links slide
+for the ML-leaning part of the room (sources in `docs/ml-links.md`). GitHub
+Pages serves `main` at
 <https://bradleypmartin.github.io/20260930-zd-ai-pdes-demo/>.
 
 Results tables, decisions log, and what happened when: `docs/demo-outline.md`.
@@ -63,7 +79,8 @@ src/pdes_demo/   library code
 scripts/         drivers that write figures and clips to outputs/;
                  check_slide_quotes.py
 tests/           pytest, 106 tests; every numerical routine has one
-docs/            demo-outline.md, navier-stokes-notes.md, paper-index.md
+docs/            demo-outline.md, navier-stokes-notes.md, ml-links.md,
+                 paper-index.md
 slides/          talk.tex → talk.pdf (committed), notes.md (speaker script with
                  clip cues), clips.html (keyboard clip player), figures/ and
                  videos/ (committed; build.sh refreshes them from outputs/),
