@@ -46,14 +46,19 @@ statement lets a counterexample use a smooth stirring force. The popular
 picture, "can turbulence blow up on its own", is the unforced version, and
 nobody has answered that.
 
-## 5. What happened, in two weeks (3/16, 3:30)
+## 5. What happened, in three weeks (3/16, 3:30)
 
-Walk the timeline left to right, two colours. Blue: Alpöge and Buckmaster had
-results in mid-August and went public the night of Sep 7. Orange: OpenAI's
-sprint started Sep 1 after a rumour, reached the result Sep 5, announced
-Sep 8. Grey: Clay on Sep 11 said "apparently settled" and "unhurried"; the
-Fields Medalists published the same day; a week later Clay still lists the
-problem as Active.
+Walk the timeline left to right, three colours. Blue: Alpöge and Buckmaster
+had results in mid-August and went public the night of Sep 7. Orange:
+OpenAI's sprint started Sep 1 after a rumour, reached the result Sep 5,
+announced Sep 8. Grey: Clay on Sep 11 said "apparently settled" and
+"unhurried"; the Fields Medalists published the same day. Orange again, last
+box: on Sep 21 OpenAI said the same model has since resolved more than 100
+long-standing open problems, none released yet. In answer to the Fields
+Medalists, nine mathematicians (Gowers, Hairer and Witten among them) set up
+an independent, unpaid group at the Institute for Advanced Study. Its first
+job is advising OpenAI on how to release those results. As of Sep 29, Clay
+still lists the problem as Active.
 
 ## 6. The claim, and the picture behind it (4/16, 5:15)
 
