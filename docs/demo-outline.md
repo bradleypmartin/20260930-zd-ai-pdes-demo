@@ -4,7 +4,7 @@ Audience: Ziff Davis coworkers from several parts of the org. Bright tech
 workers; assume no background in numerical PDEs or PDEs at all. This is a
 high-level share-out about mathematical simulation and what a domain expert
 experiences collaborating with current AI. **No live coding**: everything is
-prepared in advance (three clips + a 19-page slide deck PDF). Thesis of the
+prepared in advance (three clips + a 20-page slide deck PDF). Thesis of the
 talk (revised 2026-09-19, deck title *AI and Applied Math circa September
 2026*): one pattern at every scale, agents' power paired with a human's
 intuition in a field, seen twice:
@@ -73,7 +73,7 @@ Economist, NYT, WSJ).
 - **What is still human here?** Problem selection, the physical picture in
   §2, judging significance, deciding what to formalize.
 
-### Slides (`slides/talk.tex`; culled 2026-09-19 for #18, 19 pages, no backup)
+### Slides (`slides/talk.tex`; culled 2026-09-19 for #18, 20 pages, no backup)
 
 Budget: title, a framing slide, two section slides, seven content slides per
 part, and a links slide. About two minutes a slide. Backup slides were dropped;
@@ -96,7 +96,9 @@ the equations, the stability figure, and the numbers tables live in the repo.
    clip; 2-D nodes; 2-D snapshot (curved case) + clips; 1-D and 2-D convergence on one
    slide, left panels cropped by `build.sh`; the collaboration with number
    tiles; comparison table).
-17. For the curious (links; on screen during questions).
+17. For the curious -- more PDEs (links; on screen during questions).
+18. For the curious -- ML applications (added 2026-09-29; unnumbered and
+   optional; nine vetted links, sources and checks in `docs/ml-links.md`).
 
 Speaker script with timings: `slides/notes.md`.
 
@@ -110,7 +112,7 @@ it to Python, and verified it against analytic results in an afternoon."
 
 ### Deliverables (as built)
 
-- `slides/talk.pdf`: 19-page Beamer deck built with tectonic; `slides/notes.md`
+- `slides/talk.pdf`: 20-page Beamer deck built with tectonic; `slides/notes.md`
   speaker script with clip cues; `slides/clips.html` keyboard clip player.
 - Clip 1, `slides/videos/wave1d_naive_vs_aware_coarse.mp4` (10 s): 1-D, 100
   nodes, standard vs interface-aware FD, an error strip under each panel; no
@@ -281,7 +283,7 @@ for the deck. It landed in two working days.
 | Sep 17 | Scaffold, papers, plan. 1-D port with the exact ray-sum reference (#4). 2-D in five PRs: node sets (#10), RBF-FD weights and sparse operators (#11), RK4 with analytic validation and the hyperviscosity study (#12), interface-aware stencils (#14), clips, convergence figure and one-sided resampler (#15). Coarse 1-D clip (#16). Sourced Navier–Stokes notes, Beamer deck, speaker script, `clips.html` (#17). GitHub Pages (#20). Four bugs found and fixed the same day: a ray-pruning sign error and two latent exact-solver bugs in 1-D, a driver crash in 2-D. |
 | Sep 19 | Deck culled to seven content slides per part, no backups (#21). Slide-by-slide tweak pass (#22). Spot changes: new title and thesis, aqua/violet 2-D maps, convergence factors corrected (#23). Video pass: clips re-rendered, 1-D clip without the exact curve or legends, 12/16 still reduced to three columns (#25). Docs pass (#19). |
 | Sep 20–28 | Watch Clay and OpenAI for updates; update the timeline slide if anything moves. |
-| Sep 29 | Rehearse with `slides/notes.md`; trim 8/16 then 14/16 if long; freeze; tag `talk-2026-09-30`. |
+| Sep 29 | News re-pass on Part 1: Sep 21 on the timeline (3/16), review status on 7/16, notes and script (#82). Optional ML-links slide after the links slide. Rehearse with `slides/notes.md`; trim 8/16 then 14/16 if long; freeze; tag `talk-2026-09-30`. |
 | Sep 30 | Talk. |
 
 ## Decisions log
@@ -336,7 +338,8 @@ for the deck. It landed in two working days.
   Wikipedia) on the last slide.
 - 2026-09-19: Deck budget is title, framing, two section frames, seven
   content frames per part, links; no backup slides (detail lives in the repo).
-  Slides are referred to by footer number (n/16); PDF page = n + 3.
+  Slides are referred to by footer number (n/16); PDF page = n + 2 in Part 1,
+  n + 3 in Part 2.
 - 2026-09-19: Deck retitled *AI and Applied Math circa September 2026:
   excitement, ethics, and individual exploration*; thesis flipped to one
   pattern at every scale. The assistant is named (Claude Fable 5.1). The
@@ -350,3 +353,12 @@ for the deck. It landed in two working days.
   each method's error map, because the two solvers' waves cannot be told
   apart by eye at 10,000 nodes; the clips keep both waves. Clips stay at
   120 dpi and the 2-D ones square.
+- 2026-09-29: Sep 17–29 news re-checked at the source (#82). OpenAI's Sep 21
+  advisory group and its "more than 100" claim go on the timeline, and the
+  review status goes on 7/16. The Hodge reports and the Sep 25 training pause
+  stay Q&A-only (Brad).
+- 2026-09-29: Optional closing slide *For the curious -- ML applications* for
+  the ML-leaning part of the audience. It is unnumbered so footers stay n/16,
+  and the old links slide becomes *-- more PDEs*. Every link was read and
+  each one-line summary is a paraphrase (no `\q{}`); sources, reception, and
+  what was checked are in `docs/ml-links.md`.

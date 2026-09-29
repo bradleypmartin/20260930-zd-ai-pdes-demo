@@ -30,7 +30,7 @@ are forked, not shared: frozen here at the talk state, evolving there.
 Part 3 and manuscript work goes there, never here.
 
 Audience: bright tech workers with no assumed PDE background. **No live
-coding.** The deliverables are `slides/talk.pdf` (19 pages), three clips in
+coding.** The deliverables are `slides/talk.pdf` (20 pages), three clips in
 `slides/videos/` played from `slides/clips.html`, and the speaker script
 `slides/notes.md`. GitHub Pages serves `main` at
 <https://bradleypmartin.github.io/20260930-zd-ai-pdes-demo/>.
@@ -100,8 +100,9 @@ Clip renders are listed in `slides/README.md`. Both demo drivers take
 - Conventional Commits. Branch names `<issue>-<short-description>`. One PR per
   issue or pass; Brad reviews and merges.
 - Default driver parameters run in seconds; bigger runs sit behind flags.
-- Slides: Brad refers to a slide by its footer number (n/16). The title and
-  the two section frames are unnumbered, so PDF page = n + 3. After any deck
+- Slides: Brad refers to a slide by its footer number (n/16). The title, the
+  two section frames, and the closing ML-links frame are unnumbered, so PDF
+  page = n + 1 for 1/16, n + 2 for 2–8/16, n + 3 for 9–16/16. After any deck
   edit: `./slides/build.sh`, render the changed pages with `pdftoppm` and look
   at them, run the quote checker, commit `talk.tex` and `talk.pdf` together.
   `\q{}` marks a sourced quotation (checked against the notes), `\sq{}` a
