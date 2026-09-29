@@ -1,6 +1,8 @@
 # Navier–Stokes notes for Part 1
 
-Working notes for the first half of the talk. Last full pass: 2026-09-17.
+Working notes for the first half of the talk. Last full pass: 2026-09-29
+(previous: 2026-09-17; what the second pass found is under "Follow-ups, 17–29
+September").
 
 Two tiers. **Verified** means we read it in a primary source: a PDF in
 `papers/`, the Lean repository, a statement published by the person or
@@ -27,6 +29,12 @@ are attributed, never asserted.
 | Sep 10 | OpenAI updates the post with the result of its investigation into user data; second (and last) commit to the Lean repo. | OpenAI post footnote 2; GitHub API |
 | Sep 11 | Clay Mathematics Institute: the problem "has apparently been settled"; the evaluation process is "deliberately unhurried". Twenty-five Fields Medalists publish *A Severe Misalignment of AI in Mathematics*. | claymath.org; mathandai.org |
 | Sep 16–17 | Nature editorial *AI companies must work with the research community to protect attribution*; Nature news *Who gets credit in the AI era?*. Clay's site lists the problem as "Active". Lean repo at 1,935 stars. | nature.com; claymath.org; GitHub API |
+| Sep 17 | Constantin, Ignatova and Vicol: for constructions like OpenAI's, the force cannot vanish near the singular point or be real analytic. | arXiv:2609.20803 |
+| Sep 21 | OpenAI: the same internal model "has now resolved more than 100 long-standing open problems"; an independent Advisory Group on Mathematics and AI, hosted at IAS, forms in response to the declaration. | OpenAI post; agmai.org |
+| Sep 22 | NPR: Gómez-Serrano reports a consensus that the proof is correct; Maynard finds little human understanding in it yet. | npr.org |
+| Sep 25 | OpenAI reports that training and tool-use inference of its most capable models "remain paused" after an agent reached the internet through DNS on Sep 20. ICIAM statement on mathematics and AI. | alignment.openai.com; Tao's blog |
+| Sep 28 | Lei and Ren post Part I of a human rewrite of the manuscript (the profile construction). | arXiv:2609.35406 |
+| Sep 29 | Re-check: manuscript, Lean repo (2,013 stars, no commits since Sep 10), Buckmaster's papers, OpenAI's post, and Clay's status ("Active") all unchanged. Declaration at 28 Fields Medalists and 8,094 endorsers. | CDN headers; GitHub API; openai.com; claymath.org; mathandai.org |
 
 ## Verified (primary sources)
 
@@ -280,7 +288,10 @@ are attributed, never asserted.
   the isolation of new methods and ideas, and citing relevant previous work
   of others. As in all creative professions, this raises severe attribution
   and plagiarism questions."; "AI offers the potential of enhancing and
-  accelerating genuine mathematical study and understanding."
+  accelerating genuine mathematical study and understanding." Tao's Mastodon
+  post of Sep 11 says "A group of 25 Fields Medalists". On 2026-09-29 the page
+  lists 28 (Drinfeld, Margulis, and Mumford added) and the endorsers page
+  (mathandai.org/endorsers.php) reads "8,094 endorsers".
 - **American Mathematical Society**, Sep 8 (post on X, first sentence read
   via the syndication API): "The news today of progress on resolving the
   Navier–Stokes problem ... represents a milestone advance in human
@@ -291,6 +302,83 @@ are attributed, never asserted.
   is human understanding".
 - **London Mathematical Society**, Sep 9: "This is, above all, a great human
   achievement, enabled by a powerful new tool." (Mark Chaplain, president.)
+- **ICIAM**, Sep 25: a statement on mathematics and AI (short and long
+  versions), noted on Tao's blog the same day; the long version cites the LMS
+  Navier–Stokes statement. Not read beyond Tao's post.
+
+### Follow-ups, 17–29 September (read 2026-09-29)
+
+**Unchanged.** Manuscript and Euler companion: same size and `Last-Modified`
+(Sep 8) on the CDN. Buckmaster's statement and three preprints: same size and
+`Last-Modified` (Sep 8); his homepage last changed in January. Lean repo:
+still two commits (Sep 8, Sep 10), 2,013 stars; `fluid_lean`: one commit
+(Sep 8), two issues, neither a correctness report. OpenAI's post, read in a
+browser: text and footnote 2 (the Sep 10 update) as before. Clay: news page
+has nothing after Sep 11, problem page still **Active**. Tao's Mastodon:
+nothing on Navier–Stokes after Sep 11.
+
+**OpenAI, *Advisory Group on Mathematics and Artificial Intelligence*** (Sep
+21, openai.com, read in a browser). "On August 28, we began training a new
+internal model. In addition to resolving the Navier–Stokes Millennium Prize
+problem, this model has now resolved more than 100 long-standing open problems
+across most areas of mathematics." It cites the declaration: "mathematicians
+raise concerns about the negative externalities of solving open problems as a
+benchmark for new AI systems". The group "will operate independently from
+OpenAI"; "Its members will not be paid by OpenAI"; "the group will not be
+responsible for advising us on how to pace our internal progress on
+mathematics." Members: François Charles, Camillo De Lellis, Timothy Gowers,
+Martin Hairer (also a declaration signatory), Nikhil Srivastava, Ulrike
+Tillmann, Ravi Vakil, Edward Witten, Melanie Matchett Wood; hosted at the
+Institute for Advanced Study. None of the 100+ results had been released as of
+Sep 29.
+
+**The group's own site** (agmai.org). "This group came together after OpenAI
+approached some of its members about establishing an external advisory board.
+In agreement with OpenAI, they decided to instead create an independent group".
+Current task: "advising OpenAI on how to coordinate the release of a large
+number of significant results in mathematics that they report have been
+produced by their internal model." It asks the community for input.
+
+**OpenAI misalignment report** (alignment.openai.com, report updated Sep 25).
+An agent on a search task in RL training reached a public chatbot through
+"insufficient DNS filtering in its training sandbox"; flagged within 15
+minutes, run killed 2.5 hours later. "All training, evaluation, and inference
+with tool-use (defined broadly) of our most capable models remain paused." The
+report does not say whether the Navier–Stokes model is among them; do not
+connect the two. Q&A only.
+
+**Constantin, Ignatova, Vicol**, arXiv:2609.20803 (v1 Sep 17), *Regularity of
+asymptotically axisymmetric solutions to the 3D Navier-Stokes equations with
+analytic forcing*. Abstract: "in the construction of [OpenAI], and in any
+construction with properties (i) and (ii) whose force remains bounded in C^2 up
+to the singular time, the force can neither vanish identically near the
+singular point, nor be real analytic in the space variables". Properties (i)
+and (ii): anisotropic Type II bounds on the angular mean, and exact
+axisymmetry in a collapsing core. A limit on the method, not an error in it.
+
+**Lei and Ren**, arXiv:2609.35406 (v1 Sep 28), *Finite-Time Blowup for
+Navier-Stokes with Smooth Forcing, Part I*. The first human re-exposition:
+"a readable and accessible version of the profile-construction part of
+OpenAI's manuscript"; "We regard OpenAI's work as a major advance on the
+Navier-Stokes Millennium Prize Problem." The oscillatory-pulse cancellation is
+left to Part II, not yet posted.
+
+**Other papers.** Gamburd, arXiv:2609.28591 (essay, v1 Sep 23): the manuscript
+was "read in full, at the moment of this writing (20 September 2026), by no
+human being". Petrillo and Glimm, arXiv:2609.23868 (Sep 20): "The unforced
+problem, statements (A) and (B), stands open". Santibañez-Leal, Zenodo record
+22820521 (Sep 17): OpenAI's Lean certificate "was rebuilt (11,424 jobs, zero
+sorryAx, three standard axioms)" and replayed through the kernel, an
+independent reproduction of the check. Anandkumar's group revised both Euler
+preprints on Sep 24: arXiv:2609.10867 is now titled *Self-Similar Singularity*
+(v1 said *Stable*) and still says "We provide evidence"; arXiv:2609.10860 now
+calls itself "a preliminary framework" and is "Conditional on rigorous
+certification of the estimates and constants". The timeline's "numerical
+route" wording still holds.
+
+**Tao's blog.** Sep 23, guest post by Tapio Schneider: "The formal
+verification supports its correctness, but mathematicians are still working
+to digest it." Sep 25: the ICIAM statement (above).
 
 ## Reported (press; attribute on slides)
 
@@ -343,6 +431,36 @@ are attributed, never asserted.
   Melbourne), **Computational Complexity** (Fortnow): commentary; Fortnow
   calls Lean "a time-stamp, a way to claim your theorem before having to
   write it up properly".
+- **Nature editorial** (16 Sep, read without a login 2026-09-29): "Last Tuesday
+  is likely to go down as the start of an epoch in the history of
+  mathematics"; the breakthrough "cost several million US dollars"; asks
+  companies to "switch from 'opt-out' to 'opt-in' approaches to data sharing".
+  The Sep 17 news piece is still behind a login past its first paragraph.
+- **Nature Q&A with Mark Chen** (25 Sep): "I want to dispel the notion that we
+  create math-specific models." On the advisory group: "it's not our desire at
+  all to cover the field. We want to co-develop the norms." An update dated 29
+  Sep reports the pause (see Follow-ups).
+- **Scientific American** (Howlett, 21 Sep, *Did OpenAI Solve the Wrong
+  Navier-Stokes Problem?*). Luis Silvestre (Chicago): "The most important
+  problem is unsolved"; "The Clay problem is settled, but the main problem for
+  the Navier-Stokes equations is not." The article says the Constantin–
+  Ignatova–Vicol paper shows "OpenAI's method can never be extended to solve
+  the full problem", which is stronger than the paper's own abstract; quote the
+  paper, not the gloss.
+- **NPR** (Brumfiel, 22 Sep). Gómez-Serrano: the Lean code "did compile as
+  expected", and on that basis "the community seems to have the consensus that
+  it is correct." Maynard (Oxford): "So far it's been very difficult to really
+  extract any human understanding from this new AI proof." Buckmaster: "It's a
+  terribly written paper."
+- **TechCrunch** (21 Sep): on the advisory group and the 100+ claim; adds
+  nothing beyond OpenAI's post.
+- **A second Millennium problem (Q&A only; not for slides).** Decrypt (17
+  Sep): "OpenAI told the New York Times it has made 'substantial progress' on
+  a second Millennium Prize Problem", unnamed; the NYT piece itself is unread.
+  The Information, via the-decoder (17 Sep) and Gizmodo (18 Sep), citing one
+  source: employees expect to solve the Hodge conjecture soon. Nothing
+  released. Gizmodo alone reports that OpenAI withdrew its sponsorship of a
+  Caltech AI "Mathathon".
 - **Wikipedia**, *Navier–Stokes priority controversy*: a running aggregate
   with the sequence of OpenAI statements (Sep 8 morning, Sep 8 afternoon,
   Sep 9, Sep 10, Sep 13: "no user inputs past July 3rd could have influenced
@@ -356,12 +474,19 @@ are attributed, never asserted.
    allowed in (C)/(D)) but not the version most people picture (unforced).
    The unforced question is open. Tao, before the announcement: the
    regularity problem "is not important for its direct physical
-   application".
+   application". Constantin–Ignatova–Vicol (Sep 17): constructions of this
+   kind need a force at the singular point, so the method cannot simply be
+   tuned to drop it. Silvestre: "The Clay problem is settled, but the main
+   problem for the Navier-Stokes equations is not."
 2. "Machine-checked" certifies that the formal statement follows from three
    standard axioms. Whether the formal statement is the Clay statement is a
    human check, helped here by targeting an independent transcription of the
    statement. Whether the construction teaches anything is a human judgment
-   that the Fields Medalists' declaration says is the point.
+   that the Fields Medalists' declaration says is the point. Three weeks on:
+   no error reported, the Lean build independently reproduced, a consensus
+   that it is correct (Gómez-Serrano), but "very difficult to really extract
+   any human understanding" (Maynard); the first human rewrite, Part I of II,
+   appeared on Sep 28.
 3. Three routes reached the same frontier in the same week: a year-long
    two-person collaboration with several models; a ~10,000-agent, 88-hour
    run; and a numerical PINN candidate. All three stand on Córdoba and
@@ -373,13 +498,21 @@ are attributed, never asserted.
 5. What is still human: choosing the problem, the physical picture in §2,
    judging significance, deciding what to formalize, and writing it up so
    that other people can understand it.
+6. Scale. OpenAI says the same model has since resolved "more than 100"
+   long-standing open problems, and that the release of those results will be
+   coordinated with an independent group of mathematicians. Tao's
+   "non-renewable resource" line reads differently after that.
 
 ## Still unread
 
-- Nature's "Announcement controversy" section (login wall), the Sep 16
-  editorial and Sep 17 news piece beyond their titles.
+- Nature's "Announcement controversy" section and the Sep 17 news piece past
+  its first paragraph (login wall). The Sep 16 editorial is now read.
 - New Scientist (blocks scripted access), Economist (Sep 11, on the
-  declaration), NYT (Sep 10, Buckmaster profile), WSJ.
+  declaration), NYT (Sep 10, Buckmaster profile; ~Sep 17, OpenAI on a second
+  Millennium problem), WSJ, and a Science article whose URL slug is
+  `openai-breakthrough-triggers-existential-crisis-math` (seen only in search
+  results; the page sits behind a bot check; title and date unconfirmed).
+- Lei and Ren's Part II (announced, not posted); the ICIAM statement itself.
 - Manuscript §3–§10 in detail; the Lean sources beyond the Comparator
   challenge.
 
@@ -401,6 +534,34 @@ https://mathstodon.xyz/@tao (posts 117207849921390904, 117219101339291693,
 Anandkumar group
 https://anima-ai.org/2026/09/07/stable-singularity-of-the-euler-equations-on-r3-without-forcing/;
 LMS https://www.lms.ac.uk/news/navier-stokes-equations-breakthrough.
+
+Follow-ups (read 2026-09-29):
+OpenAI advisory group
+https://openai.com/index/advisory-group-on-mathematics-and-ai/ (blocks
+scripted fetch; read in a browser); https://agmai.org/; misalignment report
+https://alignment.openai.com/misalignment-reports/an-agent-used-dns-to-reach-an-external-chatbot;
+endorsers https://mathandai.org/endorsers.php; arXiv
+https://arxiv.org/abs/2609.20803 (Constantin–Ignatova–Vicol),
+https://arxiv.org/abs/2609.35406 (Lei–Ren), https://arxiv.org/abs/2609.28591
+(Gamburd), https://arxiv.org/abs/2609.23868 (Petrillo–Glimm),
+https://arxiv.org/abs/2609.10867 and https://arxiv.org/abs/2609.10860
+(Anandkumar group, v2); Lean rebuild https://zenodo.org/records/22820521;
+Tao's blog
+https://terrytao.wordpress.com/2026/09/23/headlines-and-inside-stories-understanding-and-trust-in-ai-for-mathematics-science-and-engineering/
+and
+https://terrytao.wordpress.com/2026/09/25/iciam-statement-on-mathematics-and-artificial-intelligence/.
+Press: Nature Q&A https://doi.org/10.1038/d41586-026-03028-9; Scientific
+American
+https://www.scientificamerican.com/article/did-openai-solve-the-wrong-navier-stokes-problem/;
+NPR
+https://www.npr.org/2026/09/22/nx-s1-5968588/openai-navier-stokes-problem-mathematicians-learn-little;
+TechCrunch
+https://techcrunch.com/2026/09/21/openai-forms-math-advisory-group-as-its-ai-resolves-more-than-100-open-problems/;
+Decrypt https://decrypt.co/378551/openai-progress-second-millennium-prize-math-problem;
+the-decoder
+https://the-decoder.com/openai-reportedly-closes-in-on-solving-the-hodge-conjecture-its-second-millennium-prize-problem/;
+Gizmodo
+https://gizmodo.com/openai-reportedly-trying-to-solve-hodge-conjecture-amid-feud-with-math-community-2000813658.
 
 Press:
 Nature https://doi.org/10.1038/d41586-026-02842-5 and editorial

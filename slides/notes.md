@@ -46,14 +46,19 @@ statement lets a counterexample use a smooth stirring force. The popular
 picture, "can turbulence blow up on its own", is the unforced version, and
 nobody has answered that.
 
-## 5. What happened, in two weeks (3/16, 3:30)
+## 5. What happened, in three weeks (3/16, 3:30)
 
-Walk the timeline left to right, two colours. Blue: Alpöge and Buckmaster had
-results in mid-August and went public the night of Sep 7. Orange: OpenAI's
-sprint started Sep 1 after a rumour, reached the result Sep 5, announced
-Sep 8. Grey: Clay on Sep 11 said "apparently settled" and "unhurried"; the
-Fields Medalists published the same day; a week later Clay still lists the
-problem as Active.
+Walk the timeline left to right, three colours. Blue: Alpöge and Buckmaster
+had results in mid-August and went public the night of Sep 7. Orange:
+OpenAI's sprint started Sep 1 after a rumour, reached the result Sep 5,
+announced Sep 8. Grey: Clay on Sep 11 said "apparently settled" and
+"unhurried"; the Fields Medalists published the same day. Orange again, last
+box: on Sep 21 OpenAI said the same model has since resolved more than 100
+long-standing open problems, none released yet. In answer to the Fields
+Medalists, nine mathematicians (Gowers, Hairer and Witten among them) set up
+an independent, unpaid group at the Institute for Advanced Study. Its first
+job is advising OpenAI on how to release those results. As of Sep 29, Clay
+still lists the problem as Active.
 
 ## 6. The claim, and the picture behind it (4/16, 5:15)
 
@@ -89,14 +94,33 @@ Lean checks the proof. Humans check the statement. OpenAI helped by targeting
 an independent transcription of the Clay statement. Quanta's sentence is the
 takeaway.
 
+Last bullet, where things stand three weeks on. No one has reported an error.
+Gómez-Serrano told NPR that, going on the Lean check, "the community seems to
+have the consensus that it is correct." Understanding is another matter.
+James Maynard: "So far it's been very difficult to really extract any human
+understanding from this new AI proof." The first human rewrite went up on
+Sep 28 (Lei and Ren). It covers the vortex construction only; the
+ripple step is promised in part 2.
+
 ## 10. Reactions, and questions to argue about (8/16, 12:30)
 
-Left column: Clay is careful; the 25 Fields Medalists are the strongest
-statement a mathematical community has made about AI; Tao's "non-renewable
-resource" line is the one to remember; Buckmaster's "Deep Blue–Kasparov";
-Bubeck's line shows the other frame, a capabilities demonstration. Right
-column: pick two and ask the room. Trust and compute get the most reaction
-with a tech audience. Then: "Part 2 is my end of the scale."
+Left column: Clay is careful, and as of Sep 29 still says Active. The 25
+Fields Medalists are the strongest statement a mathematical community has
+made about AI; three more medalists and 8,094 other endorsers had signed by
+Sep 29. Tao's "non-renewable resource" line is the one to remember, all the
+more now that OpenAI says the same model has resolved more than 100 other open
+problems. Buckmaster's "Deep Blue–Kasparov". Bubeck's line shows the other
+frame, a capabilities demonstration. Right column: pick two and ask the room.
+Trust and compute get the most reaction with a tech audience.
+
+If the room takes "definition of done", two answers after they have argued:
+- Luis Silvestre (Chicago), to Scientific American: "The Clay problem is
+  settled, but the main problem for the Navier-Stokes equations is not."
+- Constantin, Ignatova and Vicol (Sep 17): constructions like this one need
+  the force right at the singular point. The method cannot simply be tuned to
+  drop it.
+
+Then: "Part 2 is my end of the scale."
 
 ## 11. Part 2 section (14:30)
 
@@ -157,3 +181,27 @@ checking, and understanding.
 Point at the gentle starts. Repo link, which has the equations, the
 stability figure, and the numbers behind the convergence plots for anyone
 who wants the detail. Open for questions.
+
+## If asked (Part 1, Q&A only; not on the slides)
+
+Sources for each line are in `docs/navier-stokes-notes.md` (re-checked Sep 29).
+
+- **A second Millennium problem?** Reported, not announced. OpenAI told the
+  NYT it has made "substantial progress" on an unnamed second one (via
+  Decrypt); The Information, citing one source, says it is the Hodge
+  conjecture. Nothing has been released.
+- **Is that model still running?** On Sep 25 OpenAI reported that an agent
+  in training reached a public chatbot through a gap in its sandbox's DNS
+  filtering, and that "all training, evaluation, and inference with tool-use
+  ... of our most capable models remain paused." The report does not say
+  whether that includes the Navier–Stokes model; don't connect the two.
+- **Did OpenAI answer the mathematicians?** The advisory group on the
+  timeline. Mark Chen to Nature (Sep 25): "I want to dispel the notion that we
+  create math-specific models."
+- **The Caltech route?** Still numerical evidence. Their Sep 24 revisions call
+  the stability argument "a preliminary framework", conditional on certifying
+  its constants.
+- **Other institutions?** ICIAM issued a statement on mathematics and AI on
+  Sep 25; Tao says it echoes points already made. The LMS (Sep 9) called the
+  result "above all, a great human achievement, enabled by a powerful new
+  tool."

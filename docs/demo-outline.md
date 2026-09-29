@@ -82,7 +82,7 @@ the equations, the stability figure, and the numbers tables live in the repo.
 1. Title. 2. Why this talk (thesis, roadmap).
 3. Fluids, Newton, and a question from 1934 (no equations; flow diagram of
    the two outcomes; "a counterexample may use a smooth force" is the hinge).
-4. What happened, in two weeks (TikZ timeline, Aug 15 – Sep 17, colour by
+4. What happened, in three weeks (TikZ timeline, Aug 15 – Sep 21, colour by
    party).
 5. The claim, and the picture behind it (abstract verbatim; vortex schematic
    after Fig. 1; what it is not).
