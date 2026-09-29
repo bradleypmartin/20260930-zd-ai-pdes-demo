@@ -13,7 +13,8 @@ two scales in one narrow slice of it: partial differential equations.
    parallel Alpöge–Buckmaster result and the credit dispute, how the claim is
    being checked, and the questions it raises. Every statement on the slides
    traces to [`docs/navier-stokes-notes.md`](docs/navier-stokes-notes.md),
-   which cites a PDF in `papers/` or a URL.
+   which cites a PDF in `papers/` or a URL. The sources were last re-checked
+   on 2026-09-29.
 2. **Working with Claude on my own research.** Claude Code and I re-derived
    and re-implemented in Python the interface-aware wave solvers from my 2016
    CU Boulder applied-math dissertation: the 1-D wave equation through a
@@ -24,13 +25,28 @@ two scales in one narrow slice of it: partial differential equations.
    material boundary, the interface-aware ones do not. All of it was built on
    2026-09-17.
 
-## Part 3 moved
+## Parts 3–5: where the work went next
 
-After the freeze I kept going on something that is not in the talk: Part 3,
-an idea from my research that never got written up, and an arXiv manuscript
-about it. On 2026-09-22 both moved, with their history, to
-[`bradleypmartin/rbf-hyperbolic-interfaces-2026`](https://github.com/bradleypmartin/rbf-hyperbolic-interfaces-2026),
-which carries the Part 2 solvers forward too.
+The talk covers Parts 1 and 2. The research kept going after the freeze, and
+each later part has its own repository:
+
+- **Part 3: material edges too steep for the node spacing, in the wave
+  equation.** An idea from my research that never got written up, and an
+  arXiv manuscript about it:
+  [`bradleypmartin/rbf-hyperbolic-interfaces-2026`](https://github.com/bradleypmartin/rbf-hyperbolic-interfaces-2026).
+  It started here and moved on 2026-09-22 with its history. That repo carries
+  the Part 2 solvers forward too.
+- **Part 4: the same for elliptic and parabolic equations.** A port of the
+  heat-transport half of the dissertation, extended the way Part 3 extends
+  the wave solvers, with its own manuscript:
+  [`bradleypmartin/rbf-elliptic-parabolic-interfaces-2026`](https://github.com/bradleypmartin/rbf-elliptic-parabolic-interfaces-2026).
+- **Part 5: wave-equation inverse problems.** First steps into full-waveform
+  inversion, in `bradleypmartin/hyperbolic-inverses-intro-2026`. It is
+  private for now, and not for secrecy: the inversion campaigns need a lot of
+  compute and time. The plan is a manuscript, with the repo going public
+  alongside it.
+
+### Part 3's history here
 
 - The tag
   [`part3-pre-split`](https://github.com/bradleypmartin/20260930-zd-ai-pdes-demo/tree/part3-pre-split)
@@ -40,11 +56,17 @@ which carries the Part 2 solvers forward too.
   [commit map](https://github.com/bradleypmartin/rbf-hyperbolic-interfaces-2026/blob/main/docs/split-commit-map.txt),
   not through this tag: three of them are commits of the #54 branch from
   before its rebase, which never reached `main`.
-- This tree is `0a2a8a7` (#26, the last commit before Part 3) apart from
-  this README and `CLAUDE.md`. #78 regenerated the talk from it: the
-  figures, the clips frame for frame and the text of `slides/talk.pdf` all
-  came out as committed (the one pixel-level difference is explained on
-  #78). The commands, about five minutes in all:
+- The code (`src/`, `scripts/`, `tests/`) and the clips are exactly as at
+  `0a2a8a7` (#26, the last commit before Part 3). #78 regenerated the talk
+  from that code, and everything came out as committed: the figures, the
+  clips frame for frame, and the text of `slides/talk.pdf`. The one
+  pixel-level difference is explained on #78.
+- Since then, #81 re-rendered the 1-D convergence figure and pinned the build
+  date, and #82 and #83 updated the deck, the script and the notes on
+  2026-09-29.
+
+To regenerate the figures, the clips and the deck from that code (about five
+minutes in all):
 
 ```sh
 uv run python scripts/wave1d_demo.py --n 100 --sharpness 150 --out outputs/wave1d_naive_vs_aware_coarse.mp4  # clip 1 and its still
@@ -62,7 +84,9 @@ Hosted from `main` by GitHub Pages: [landing page](https://bradleypmartin.github
 [slides (PDF)](https://bradleypmartin.github.io/20260930-zd-ai-pdes-demo/slides/talk.pdf),
 [the three clips](https://bradleypmartin.github.io/20260930-zd-ai-pdes-demo/slides/clips.html).
 Sources in `slides/` (see its README for the build, the quotation checker, and
-the clip player).
+the clip player). The deck ends with two links slides. The second, on applied
+ML, is optional and unnumbered; its sources are in
+[`docs/ml-links.md`](docs/ml-links.md).
 
 To play the clips in the talk: open `slides/clips.html` in Chrome, press `F`
 for full screen, then `1`, `2` or `3` to play a clip from the start (`space`
@@ -103,7 +127,7 @@ clip.
 | `src/pdes_demo/` | Library. `wave1d/`: FD stencils across interfaces, RK4, exact ray-sum solution. `wave2d/`: node sets, periodic kNN, Gaussian RBF-FD weights, interface-aware stencils, hyperviscosity, sparse elastic operators, RK4, analytic plane-wave reference, one-sided resampling. Shared Fornberg weights and plotting palette. |
 | `scripts/` | Drivers for the figures and clips; `check_slide_quotes.py` |
 | `tests/` | pytest suite (convergence and analytic checks) |
-| `docs/` | `demo-outline.md` (results tables, decisions log, what happened when), `navier-stokes-notes.md` (sourced notes for Part 1), `paper-index.md` (page ranges per PDF) |
+| `docs/` | `demo-outline.md` (results tables, decisions log, what happened when), `navier-stokes-notes.md` (sourced notes for Part 1), `ml-links.md` (sources for the ML-links slide), `paper-index.md` (page ranges per PDF) |
 | `slides/` | `talk.tex` → `talk.pdf`, `notes.md` speaker script, `figures/`, `videos/` (the three clips), `clips.html` clip player, `build.sh` |
 | `papers/` | Index of reference papers with links and checksums, fetch script; PDFs are not committed |
 | `index.html` | GitHub Pages landing page |
@@ -162,7 +186,10 @@ lists what was ported and what was not.
 - [x] Docs pass (2026-09-19)
 - [x] Part 3 and its manuscript moved to their own repo; this tree back to
       the talk (2026-09-22)
-- [ ] Rehearsal on Sep 29, then freeze and tag `talk-2026-09-30`
+- [x] News pass on Part 1: sources re-checked, Sep 21 added to the
+      timeline, review status on the machine-checked slide (#82); optional
+      ML-links slide (#83) (2026-09-29)
+- [x] Rehearsal (2026-09-29); frozen at the tag `talk-2026-09-30`
 
 ## License
 
