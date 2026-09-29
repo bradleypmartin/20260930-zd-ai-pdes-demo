@@ -104,12 +104,23 @@ ripple step is promised in part 2.
 
 ## 10. Reactions, and questions to argue about (8/16, 12:30)
 
-Left column: Clay is careful; the 25 Fields Medalists are the strongest
-statement a mathematical community has made about AI; Tao's "non-renewable
-resource" line is the one to remember; Buckmaster's "Deep Blue–Kasparov";
-Bubeck's line shows the other frame, a capabilities demonstration. Right
-column: pick two and ask the room. Trust and compute get the most reaction
-with a tech audience. Then: "Part 2 is my end of the scale."
+Left column: Clay is careful, and as of Sep 29 still says Active. The 25
+Fields Medalists are the strongest statement a mathematical community has
+made about AI; three more medalists and 8,094 other endorsers had signed by
+Sep 29. Tao's "non-renewable resource" line is the one to remember, all the
+more now that OpenAI says the same model has resolved more than 100 other open
+problems. Buckmaster's "Deep Blue–Kasparov". Bubeck's line shows the other
+frame, a capabilities demonstration. Right column: pick two and ask the room.
+Trust and compute get the most reaction with a tech audience.
+
+If the room takes "definition of done", two answers after they have argued:
+- Luis Silvestre (Chicago), to Scientific American: "The Clay problem is
+  settled, but the main problem for the Navier-Stokes equations is not."
+- Constantin, Ignatova and Vicol (Sep 17): constructions like this one need
+  the force right at the singular point. The method cannot simply be tuned to
+  drop it.
+
+Then: "Part 2 is my end of the scale."
 
 ## 11. Part 2 section (14:30)
 
@@ -170,3 +181,27 @@ checking, and understanding.
 Point at the gentle starts. Repo link, which has the equations, the
 stability figure, and the numbers behind the convergence plots for anyone
 who wants the detail. Open for questions.
+
+## If asked (Part 1, Q&A only; not on the slides)
+
+Sources for each line are in `docs/navier-stokes-notes.md` (re-checked Sep 29).
+
+- **A second Millennium problem?** Reported, not announced. OpenAI told the
+  NYT it has made "substantial progress" on an unnamed second one (via
+  Decrypt); The Information, citing one source, says it is the Hodge
+  conjecture. Nothing has been released.
+- **Is that model still running?** On Sep 25 OpenAI reported that an agent
+  in training reached a public chatbot through a gap in its sandbox's DNS
+  filtering, and that "all training, evaluation, and inference with tool-use
+  ... of our most capable models remain paused." The report does not say
+  whether that includes the Navier–Stokes model; don't connect the two.
+- **Did OpenAI answer the mathematicians?** The advisory group on the
+  timeline. Mark Chen to Nature (Sep 25): "I want to dispel the notion that we
+  create math-specific models."
+- **The Caltech route?** Still numerical evidence. Their Sep 24 revisions call
+  the stability argument "a preliminary framework", conditional on certifying
+  its constants.
+- **Other institutions?** ICIAM issued a statement on mathematics and AI on
+  Sep 25; Tao says it echoes points already made. The LMS (Sep 9) called the
+  result "above all, a great human achievement, enabled by a powerful new
+  tool."
